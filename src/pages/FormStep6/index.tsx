@@ -40,7 +40,7 @@ const FormStep6 = () => {
     return (
         <Theme>
             <C.Container>
-                <p>Passo 5/6</p>
+                {/* <p>Passo 5/6</p> */}
                 {/* <h1>Lega {state.name}, onde te achamos?</h1> */}
                 <p>AVALIAÇÃO DE NÍVEL DE SUPORTE PSICOSSOCIAL PARA ALUNOS COM TEA.</p>
 

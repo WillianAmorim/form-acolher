@@ -47,7 +47,7 @@ const FormStep4 = () => {
     return (
         <Theme>
             <C.Container>
-                <p>Passo 4/5</p>
+                {/* <p>Passo 4/5</p> */}
                 {/* <h1>Lega {state.name}, onde te achamos?</h1> */}
                 <p>Preencha com seus dados para conseguirmos entrr em contato.</p>
 

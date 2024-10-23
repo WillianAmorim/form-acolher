@@ -102,7 +102,7 @@ const FormStep6 = () => {
     return (
         <Theme>
             <C.Container>
-                <p>Passo 7/7</p>
+                {/* <p>Passo 7/7</p> */}
                 {/* <h1>Lega {state.name}, onde te achamos?</h1> */}
                 <p>Discurso/Linguagem/Comunicação</p>
 

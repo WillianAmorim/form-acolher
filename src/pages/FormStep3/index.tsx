@@ -60,7 +60,7 @@ const FormStep3 = () => {
     return (
         <Theme>
             <C.Container>
-                <p>Passo 3/3</p>
+                {/* <p>Passo 3/3</p> */}
                 {/* <h1>Lega {state.name}, onde te achamos;/</h1> */}
                 <p>Preencha com seus dados para conseguirmos entrr em contato.</p>
 

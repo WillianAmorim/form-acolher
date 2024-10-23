@@ -9,7 +9,6 @@ type State = {
     name: string;
     level: 0 | 1;
     email: string;
-    github: string;
     genero: string;
     idade: string;
     matricula: string;
@@ -54,7 +53,6 @@ const initialData: State = {
     name: '',
     level: 0,
     email: '',
-    github: '',
     genero: '',
     idade: '',
     matricula: '',
@@ -89,7 +87,6 @@ export enum FormActions {
     setName,
     setLevel,
     setEmail,
-    setGitHub,
     setGenero,
     setIdade,
     setMatricula,
@@ -125,8 +122,6 @@ const FormReducer = (state: State, action: Action) => {
             return { ...state, level: action.payload };
         case FormActions.setEmail:
             return { ...state, email: action.payload };
-        case FormActions.setGitHub:
-            return { ...state, github: action.payload };
         case FormActions.setGenero:
             return { ...state, genero: action.payload };
         case FormActions.setIdade:

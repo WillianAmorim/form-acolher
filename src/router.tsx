@@ -6,14 +6,16 @@ import FormStep4 from './pages/FormStep4';
 import FormStep5 from './pages/FormStep5';
 import FormStep6 from './pages/FormStep6';
 import FormStep7 from './pages/FormStep7';
+import Home from './pages/Home/index'
 import FormStepFinish from './pages/FormStepFinish';
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<FormStep1 />} />
-        <Route path="/step1" element={<Navigate to="/" />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Navigate to="/home" />} />
+        <Route path="/step1" element={<FormStep1 />} />
         <Route path="/step2" element={<FormStep2 />} />
         <Route path="/step3" element={<FormStep3 />} />
         <Route path="/step4" element={<FormStep4 />} />

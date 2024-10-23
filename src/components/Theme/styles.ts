@@ -40,6 +40,8 @@ export const Sidebar = styled.div`
         display: flex;
         max-width: 100vw;
         justify-content: space-evenly;
+
+        display: none;
     }
 
 `
