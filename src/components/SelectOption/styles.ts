@@ -2,8 +2,10 @@ import styled from "styled-components";
 
 export const Container = styled.div<{ selected: boolean; }>`
     display: flex;
-    border: 2px solid ${props => props.selected ? '#25CD89' : '#16195C'};
+    /* border: 2px solid ${props => props.selected ? '#25CD89' : 'rgba(255,255,255,0.2)'}; */
+    background-color: ${props => props.selected ? '#F977B7' : 'rgba(255,255,255,0.2)'};
     border-radius: 10px;
+    border: none;
     padding: 20px;
     margin-top: 7px;
     margin-bottom: 15px;
@@ -15,7 +17,7 @@ export const Container = styled.div<{ selected: boolean; }>`
     }
 
     &:hover {
-        border: 2px solid #496459;
+        /* border: 2px solid #496459; */
     }
 `;
 

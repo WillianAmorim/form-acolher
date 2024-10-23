@@ -1,8 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    background-color: #02044A;
+    background-color: #0173DF;
     color: #FFF;
+    padding-bottom: 25px;
+
+    /* background-image: linear-gradient(to bottom right, #008cad, #EC96B5); */
     min-height: 100vh;
 
     @media only screen and (max-width: 768px) {
@@ -31,7 +34,7 @@ export const Steps = styled.div`
 
 export const Sidebar = styled.div`
     max-width: max-content;
-    border-right: 1px solid #16195c;
+    border-right: 1px solid #FFF;
 
     @media only screen and (max-width: 768px) {
         display: flex;

@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
     p {
         font-size: 13px;
-        color: #B8B8D4;
+        /* color: #B8B8D4; */
+        color: #FFF;
     }
 
     h1 {
@@ -38,7 +39,7 @@ export const Container = styled.div`
     }
 
     button {
-        background-color: #25CD89;
+        /* background-color: #25CD89; */
         color: #FFF;
         font-size: 14px;
         font-weight: bold;
@@ -47,12 +48,22 @@ export const Container = styled.div`
         border-radius: 30px;
         cursor: pointer;
         margin-top: 30px;
+
+        background-color: #FF2193;
     }
 
     .backButton {
-        font-size: 16px;
+        font-size: 14px;
         text-decoration: none;
         padding: 20px 40px;
-        color: #B8B8D4;
+        color: #FFF;
+        padding: 20px 40px;
+        font-weight: bold;
+        border: 0;
+        cursor: pointer;
+        margin-top: 30px;
+        border-radius: 30px;
+        margin-right: 10px;
+        background-color: #494A7C;
     }
 `

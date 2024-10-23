@@ -32,6 +32,7 @@ type State = {
     questionEight: string;
     questionNine: string;
     questionTen: string;
+    unidade: string
 }
 
 type Action = {
@@ -76,6 +77,7 @@ const initialData: State = {
     questionEight: '',
     questionNine: '',
     questionTen: '',
+    unidade: '',
 
 }
 // Context
@@ -110,6 +112,7 @@ export enum FormActions {
     setQuestionEight,
     setQuestionNine,
     setQuestionTen,
+    setUnidade,
 }
 
 const FormReducer = (state: State, action: Action) => {
@@ -154,6 +157,8 @@ const FormReducer = (state: State, action: Action) => {
             return { ...state, questionSecond: action.payload };
         case FormActions.setQuestionThird:
             return { ...state, questionThird: action.payload };
+        case FormActions.setQuestionFourth:
+            return { ...state, questionFourth: action.payload };
         case FormActions.setQuestionFive:
             return { ...state, questionFive: action.payload };
         case FormActions.setQuestionSix:
@@ -166,6 +171,8 @@ const FormReducer = (state: State, action: Action) => {
             return { ...state, questionNine: action.payload };
         case FormActions.setQuestionTen:
             return { ...state, questionTen: action.payload };
+        case FormActions.setUnidade:
+            return { ...state, unidade: action.payload };
         default:
             return state;
     }

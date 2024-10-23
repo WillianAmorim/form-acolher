@@ -26,7 +26,7 @@ export const Container = styled.div`
 
 export const Info = styled.div`
     flex: 1;
-    /* margin-right: 20px; */
+    margin-right: 10px;
 `;
 
 export const Title = styled.div`
@@ -44,7 +44,8 @@ export const Title = styled.div`
 export const Description = styled.div`
     text-align: right;
     font-size: 13px;
-    color: #B8B8D4;
+    /* color: #B8B8D4; */
+    color: #FFF;
 
     @media (max-width: 768px) {
         text-align: center;
@@ -55,7 +56,7 @@ export const IconArea = styled.div<{ active: boolean;}>`
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: ${props => props.active ? '#25CD89' : '#494A7C'};
+    background-color: ${props => props.active ? '#F977B7' : '#494A7C'};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,11 +69,11 @@ export const IconArea = styled.div<{ active: boolean;}>`
 export const Point = styled.div<{ active: boolean;}>`
     width: 10px;
     height: 10px;
-    border: 2px solid #494A7C;
+    border: 2px solid #FFF;
     border-radius: 50%;
     margin-left: 30px;
     margin-right: -6px;
-    background-color: ${props => props.active ? '#25CD89' : '#02044A'};
+    background-color: ${props => props.active ? '#F977B7' : '#FFF'};
 
     @media (max-width: 768px) {
         display: none;

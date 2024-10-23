@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     padding: 25px 0;
-    border-bottom: 1px solid #16195c;
+    border-bottom: 1px solid #FFF;
 
     @media (max-width: 768px) {
         text-align: center;
@@ -23,7 +23,8 @@ export const Container = styled.div`
 
     p {
         font-size: 14px;
-        color: #B8B8D4;
+        /* color: #B8B8D4; */
+        color: #FFF;
 
         @media (max-width: 768px) {
             font-size: 12px;

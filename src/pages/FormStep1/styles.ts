@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
     p {
         font-size: 13px;
-        color: #B8B8D4;
+        /* color: #B8B8D4; */
+        color: #FFF;
 
         @media (max-width: 768px) {
             margin: 15px 0;
@@ -32,7 +33,7 @@ export const Container = styled.div`
     hr {
         height: 1px;
         border: 0;
-        background-color: #16195C;
+        background-color: #FFF;
         margin: 30px 0;
 
         @media (max-width: 768px) {
@@ -49,21 +50,24 @@ export const Container = styled.div`
             box-sizing: border-box;
             width: 100%;
             padding: 20px 10px;
-            border: 2px solid #25CD89;
+            border: 1px solid rgba(255,255,255,0.2);
+            /* border: none; */
             border-radius: 10px;
             color: #FFF;
+            background-color: #0173DF;
             outline: 0;
             font-size: 15px;
-            background-color: #02044A;
+            /* background-color:rgba(255,255,255,0.2); */
 
             @media (max-width: 768px) {
                 padding: 10px 5px;
             } 
         }
+
     }
 
     button {
-        background-color: #25CD89;
+        background-color: #FF2193;
         color: #FFF;
         font-size: 14px;
         font-weight: bold;
