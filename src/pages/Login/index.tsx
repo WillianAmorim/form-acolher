@@ -1,7 +1,7 @@
 import * as C from './styles'
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-
+import LogoAcolher from '../../assets/LogoAcolher.webp'
 
 
 
@@ -9,7 +9,9 @@ const Login = () => {
     return (
         <C.Container>
             <C.Form action="">
-                <C.DivHeader><h1>Pré-matrícula</h1></C.DivHeader>
+                <C.DivHeader>
+                    <img src={LogoAcolher} alt="" />
+                </C.DivHeader>
                 <C.DivInputs>
                     <C.DivInput>
                         <C.IconStyleLogin as={MdEmail}/>

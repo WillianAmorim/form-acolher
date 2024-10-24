@@ -19,11 +19,12 @@ export const Container = styled.div`
 export const Form = styled.form`
     display: flex;
     flex-direction: column;
-    background-color: red;
+    /* background-color: red; */
     width: 25%;
     height: 450px;
     border-radius: 25px;
-    background-color: rgba(0, 0, 0, 0.3); /* Preto com 70% de opacidade */
+    /* background-color: rgba(0, 0, 0, 0.3);  */
+    background-color: rgba(255, 255, 255, 0.2); 
     padding-bottom: 50px;
     
     @media (max-width: 768px) {
@@ -33,13 +34,19 @@ export const Form = styled.form`
 
 export const DivHeader = styled.div`
 
-    background-color: rgba(164, 164, 164, 0.2);
+    /* background-color: rgba(164, 164, 164, 0.2); */
+    background-color: rgba(255, 255, 255, 0.5);
+    /* background-color: #FFF; */
     border-radius: 25px 25px 0 0;
     padding: 15px;
     text-align: center;
     color: #FFF;
     
-
+    img {
+        @media (max-width: 768px) {
+            width: 200px;
+        }
+    }
 `
 
 export const DivInputs = styled.div`
@@ -79,6 +86,10 @@ export const DivInput = styled.div`
     input:focus {
         outline: none;
         box-shadow: none;
+    }
+
+    input::placeholder {
+        color: #FFF;
     }
 `
 
