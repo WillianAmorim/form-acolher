@@ -7,8 +7,10 @@ import FormStep5 from './pages/FormStep5';
 import FormStep6 from './pages/FormStep6';
 import FormStep7 from './pages/FormStep7';
 import Login from './pages/Login';
-import Home from './pages/Home/index'
+import Home from './pages/Home/index';
 import FormStepFinish from './pages/FormStepFinish';
+import HomePageDashboard from './modules/dashboard/pages/homePageDashboard';  // Página de dashboard
+import StudentRoutes from './modules/student/routes'; // Importa as rotas do módulo de aluno
 
 const Router = () => {
   return (
@@ -25,6 +27,11 @@ const Router = () => {
         <Route path="/step7" element={<FormStep7 />} />
         <Route path="/login" element={<Login />} />
         <Route path="/stepFinish" element={<FormStepFinish />} />
+
+        <Route path="/dashboard" element={<HomePageDashboard />} />
+
+        {/* Rota para as páginas do módulo de aluno */}
+        <Route path="/*" element={<StudentRoutes />} />
       </Routes>
     </BrowserRouter>
   );
