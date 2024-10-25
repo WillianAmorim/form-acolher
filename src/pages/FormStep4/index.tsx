@@ -49,7 +49,7 @@ const FormStep4 = () => {
             <C.Container>
                 {/* <p>Passo 4/5</p> */}
                 {/* <h1>Lega {state.name}, onde te achamos?</h1> */}
-                <p>Preencha com seus dados para conseguirmos entrr em contato.</p>
+                <p>Preencha com seus dados para conseguirmos entrar em contato.</p>
 
                 <hr />
 

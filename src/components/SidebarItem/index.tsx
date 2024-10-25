@@ -8,6 +8,9 @@ import { IoIosSchool } from "react-icons/io";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { FaQuestion } from "react-icons/fa";
 import { GiBrain } from "react-icons/gi";
+import { FaAccessibleIcon } from "react-icons/fa";
+import { IoExtensionPuzzleSharp } from "react-icons/io5";
+
 
 
   
@@ -38,7 +41,7 @@ export const SidebarItem = ({ title, description, icon, path, active }: Props) =
                         <BsFillTelephoneFill  className='icon' size={30} />
                     }
                     {icon === 'question' &&
-                        <FaQuestion  className='icon' size={30} />
+                        <IoExtensionPuzzleSharp  className='icon' size={30} />
                     }
                     {icon === 'brain' &&
                         <GiBrain  className='icon' size={30} />
