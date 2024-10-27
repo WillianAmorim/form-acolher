@@ -22,7 +22,7 @@ const FormStep4 = () => {
     }, [state.nome, dispatch, navigate])
 
     const handleNextStep = () => {
-        if (state.possui_deficiencia === 'Sim') {
+        if (state.possui_deficiencia === 'sim') {
             navigate('/step5')
         } else {
             navigate('/stepFinish')

@@ -30,10 +30,10 @@ const FormStep2 = () => {
         }
     }
 
-    const manageShift = (turno: string) => {
+    const manageShift = (modalidade: string) => {
         dispatch({
             type: FormActions.setModalidade,
-            payload: turno
+            payload: modalidade
         })
     }
 
@@ -52,22 +52,22 @@ const FormStep2 = () => {
                     <SelectOption
                         title="Integral"
                         description=""
-                        selected={state.modalidade === 'Integral'}
-                        onClick={() => manageShift('Integral')}
+                        selected={state.modalidade === 'integral'}
+                        onClick={() => manageShift('integral')}
                     />
 
                     <SelectOption
                         title="Matutino"
                         description=""
-                        selected={state.modalidade === 'Parcial'}
-                        onClick={() => manageShift('Parcial')}
+                        selected={state.modalidade === 'parcial'}
+                        onClick={() => manageShift('parcial')}
                     />
 
                     <SelectOption
                         title="Vespertino"
                         description=""
-                        selected={state.modalidade === 'Tarde'}
-                        onClick={() => manageShift('Tarde')}
+                        selected={state.modalidade === 'verpertino'}
+                        onClick={() => manageShift('verpertino')}
                     />
                 </label>
 

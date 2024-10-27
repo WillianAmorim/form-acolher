@@ -11,11 +11,11 @@ const FormStep6 = () => {
 
     const verifyQuestions = (value:string) => {
         if (value === 'S') {
-            return 0;
+            return 1;
         } else if (value === 'N') {
-            return 2
+            return 3
         } else {
-            return 1
+            return 2
         }
     }
 
@@ -30,7 +30,7 @@ const FormStep6 = () => {
         "responsavel_financeiro": `${state.responsavel_financeiro}`,
         "telefone": `${state.telefone}`,
         "email": `${state.email}`,
-        "possui_deficiencia": `${state.possui_deficiencia}`,
+        "possui_deficiencia": state.possui_deficiencia == 'sim' ? true:false,
         "diagnosticos": [
             {
                 "diagnostico": state.diagnostico,
@@ -97,6 +97,7 @@ const FormStep6 = () => {
               },
               body: JSON.stringify(dataForm),
             });
+            console.log(response)
       
             if (response.ok) {
               console.log("Dados enviados com sucesso");
