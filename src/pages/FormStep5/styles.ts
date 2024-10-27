@@ -21,6 +21,11 @@ export const Container = styled.div`
         margin: 30px 0;
     }
 
+    #outros {
+        display: none;
+        flex-direction: column;
+    }
+
     label {
         font-size: 13px;
         display: block;

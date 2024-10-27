@@ -2,13 +2,9 @@ import { Link } from 'react-router-dom';
 import * as C from './styles';
 
 import { IoMdPerson } from "react-icons/io";
-// import { FaBook } from "react-icons/fa";
-// import { IoIosMail } from "react-icons/io";
 import { IoIosSchool } from "react-icons/io";
 import { BsFillTelephoneFill } from "react-icons/bs";
-import { FaQuestion } from "react-icons/fa";
 import { GiBrain } from "react-icons/gi";
-import { FaAccessibleIcon } from "react-icons/fa";
 import { IoExtensionPuzzleSharp } from "react-icons/io5";
 
 

@@ -17,7 +17,7 @@ const FormStep1 = () => {
     }, [dispatch]);
 
     const handleNextStep = () => {
-        if ((state.name !== '') && (state.idade !== '') && (state.genero !== '') && (state.matricula !== '') && (state.turma !== '')) {
+        if ((state.nome !== '') && (state.idade !== '') && (state.sexo !== '') && (state.matricula !== '') && (state.serie_2025 !== '')) {
             navigate('/step2')
         } else {
             alert('Preencha os dados')
@@ -26,7 +26,7 @@ const FormStep1 = () => {
 
     const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch({
-            type: FormActions.setName,
+            type: FormActions.setNome,
             payload: e.target.value
         })
     }
@@ -47,14 +47,14 @@ const FormStep1 = () => {
 
     const setGenero = (genero: string) => {
         dispatch({
-            type: FormActions.setGenero,
+            type: FormActions.setSexo,
             payload: genero
         })
     }
 
     const handleTurmaChange = (e: ChangeEvent<HTMLSelectElement>) => {
         dispatch({
-            type: FormActions.setTurma,
+            type: FormActions.setSerie_2025,
             payload: e.target.value
         });
     };
@@ -80,7 +80,7 @@ const FormStep1 = () => {
                     <input
                         type="text"
                         autoFocus
-                        value={state.name}
+                        value={state.nome}
                         onChange={handleNameChange}
                     />
                 </label>
@@ -104,15 +104,15 @@ const FormStep1 = () => {
                     <SelectOption
                         title="Masculino"
                         description=""
-                        selected={state.genero === 'Masculino'}
-                        onClick={() => setGenero('Masculino')}
+                        selected={state.sexo === 'M'}
+                        onClick={() => setGenero('M')}
                     />
 
                     <SelectOption
                         title="Feminino"
                         description=""
-                        selected={state.genero === 'Feminino'}
-                        onClick={() => setGenero('Feminino')}
+                        selected={state.sexo === 'F'}
+                        onClick={() => setGenero('F')}
                     />
                 </label>
 
@@ -135,15 +135,15 @@ const FormStep1 = () => {
                     <SelectOption
                         title="Matrícula"
                         description=""
-                        selected={state.matricula === 'Matrícula'}
-                        onClick={() => manageEnrollmentStatus('Matrícula')}
+                        selected={state.matricula === 'matricula'}
+                        onClick={() => manageEnrollmentStatus('matricula')}
                     />
 
                     <SelectOption
                         title="Rematrícula"
                         description=""
-                        selected={state.matricula === 'Rematrícula'}
-                        onClick={() => manageEnrollmentStatus('Rematrícula')}
+                        selected={state.matricula === 'rematricula'}
+                        onClick={() => manageEnrollmentStatus('rematricula')}
                     />
                 </label>
 
@@ -151,7 +151,7 @@ const FormStep1 = () => {
 
                 <label htmlFor="turmaSelect">
                     Escolha a turma a ser cursada
-                    <select id="turmaSelect" value={state.turma} onChange={handleTurmaChange}>
+                    <select id="turmaSelect" value={state.serie_2025} onChange={handleTurmaChange}>
                         <option value="">Selecione uma turma</option>
                         <option value="bercario">Berçario</option>
                         <option value="mine-maternal">Mine Maternal</option>

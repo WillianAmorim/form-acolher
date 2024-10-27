@@ -10,7 +10,7 @@ const FormStep5 = () => {
     const { state, dispatch } = useForm();
 
     useEffect(() => {
-        if (state.name === '') {
+        if (state.nome === '') {
             navigate('/')
         } else {
             dispatch({
@@ -19,7 +19,7 @@ const FormStep5 = () => {
             })
         }
 
-    }, [state.name, dispatch, navigate])
+    }, [state.nome, dispatch, navigate])
 
     const handleNextStep = () => {
         if (state.diagnostico !== '') {
@@ -37,17 +37,36 @@ const FormStep5 = () => {
         })
     }
 
+    const handleOutrosChange = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch({
+            type: FormActions.setOutros,
+            payload: e.target.value
+        })
+    }
+
     const handleSelectComorbiditiesChange = (comorbidade: string): void => {
         const newComorbidades: string[] = state.comorbidade.includes(comorbidade)
             ? state.comorbidade.filter((item: string) => item !== comorbidade) // Verifica se matricula é um array de strings
             : [...state.comorbidade, comorbidade]; // Adiciona se não estiver
-    
+
+        const elementoOutros = document.getElementById('outros')
+
+        if (newComorbidades.includes('Outros')) {
+            if (elementoOutros) {
+                elementoOutros.style.display = 'flex';
+            }
+        } else {
+            if (elementoOutros) {
+                elementoOutros.style.display = 'none';
+            }
+        }
+
         dispatch({
             type: FormActions.setComorbidade,
             payload: newComorbidades
         });
     };
-    
+
 
     return (
         <Theme>
@@ -75,22 +94,22 @@ const FormStep5 = () => {
                     <SelectOption
                         title="Epilepsia"
                         description=""
-                        selected={state.comorbidade.includes('Epilepsia')}
-                        onClick={() => handleSelectComorbiditiesChange('Epilepsia')}
+                        selected={state.comorbidade.includes('epilepsia')}
+                        onClick={() => handleSelectComorbiditiesChange('epilepsia')}
                     />
 
                     <SelectOption
                         title="Deficiência Intelectual"
                         description=""
-                        selected={state.comorbidade.includes('Deficiência Intelectual')}
-                        onClick={() => handleSelectComorbiditiesChange('Deficiência Intelectual')}
+                        selected={state.comorbidade.includes('deficiencia-intelectual')}
+                        onClick={() => handleSelectComorbiditiesChange('deficiencia-intelectual')}
                     />
 
                     <SelectOption
                         title="Alergia"
                         description=""
-                        selected={state.comorbidade.includes('Alergia')}
-                        onClick={() => handleSelectComorbiditiesChange('Alergia')}
+                        selected={state.comorbidade.includes('alergia')}
+                        onClick={() => handleSelectComorbiditiesChange('alergia')}
                     />
                     <SelectOption
                         title="Outros"
@@ -98,6 +117,16 @@ const FormStep5 = () => {
                         selected={state.comorbidade.includes('Outros')}
                         onClick={() => handleSelectComorbiditiesChange('Outros')}
                     />
+
+                    <label htmlFor="" id='outros'>
+                        Outros
+                        <input
+                            type="text"
+                            autoFocus
+                        value={state.outros}
+                        onChange={handleOutrosChange}
+                        />
+                    </label>
                 </label>
 
 

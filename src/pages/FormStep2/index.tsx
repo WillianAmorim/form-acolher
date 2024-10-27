@@ -10,7 +10,7 @@ const FormStep2 = () => {
     const { state, dispatch } = useForm();
 
     useEffect(() => {
-        if (state.name === '') {
+        if (state.nome === '') {
             navigate('/')
 
         }else {
@@ -20,10 +20,10 @@ const FormStep2 = () => {
             })
         }
 
-    }, [state.name, dispatch, navigate])
+    }, [state.nome, dispatch, navigate])
 
     const handleNextStep = () => {
-        if (state.name !== '') {
+        if (state.nome !== '') {
             navigate('/step3')
         } else {
             alert('Preencha os dados')
@@ -32,7 +32,7 @@ const FormStep2 = () => {
 
     const manageShift = (turno: string) => {
         dispatch({
-            type: FormActions.setTurno,
+            type: FormActions.setModalidade,
             payload: turno
         })
     }
@@ -52,21 +52,21 @@ const FormStep2 = () => {
                     <SelectOption
                         title="Integral"
                         description=""
-                        selected={state.turno === 'Integral'}
+                        selected={state.modalidade === 'Integral'}
                         onClick={() => manageShift('Integral')}
                     />
 
                     <SelectOption
                         title="Matutino"
                         description=""
-                        selected={state.turno === 'Parcial'}
+                        selected={state.modalidade === 'Parcial'}
                         onClick={() => manageShift('Parcial')}
                     />
 
                     <SelectOption
                         title="Vespertino"
                         description=""
-                        selected={state.turno === 'Tarde'}
+                        selected={state.modalidade === 'Tarde'}
                         onClick={() => manageShift('Tarde')}
                     />
                 </label>

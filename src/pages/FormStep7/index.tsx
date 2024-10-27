@@ -9,8 +9,64 @@ const FormStep6 = () => {
     const navigate = useNavigate();
     const { state, dispatch } = useForm();
 
+    const verifyQuestions = (value:string) => {
+        if (value === 'S') {
+            return 0;
+        } else if (value === 'N') {
+            return 2
+        } else {
+            return 1
+        }
+    }
+
+    const dataForm = {
+        "nome": `${state.nome}`,
+        "idade": `${state.idade}`,
+        "sexo": `${state.sexo}`,
+        "tipo_cadastro": `${state.matricula}`,
+        "serie_2025": `${state.serie_2025}`,
+        "modalidade": `${state.modalidade}`,
+        "nome_mae": `${state.nome_mae}`,
+        "responsavel_financeiro": `${state.responsavel_financeiro}`,
+        "telefone": `${state.telefone}`,
+        "email": `${state.email}`,
+        "possui_deficiencia": `${state.possui_deficiencia}`,
+        "diagnosticos": [
+            {
+                "diagnostico": state.diagnostico,
+                "epilepsia": state.comorbidade.includes('epilepsia'),
+                "deficiencia_intelectual": state.comorbidade.includes('deficiencia-intelectual'),
+                "alergia": state.comorbidade.includes('alergia'),
+                "outros": "",
+                "responsavel": state.responsavel_financeiro,
+            }
+        ],
+        "avaliacoes": [
+            {
+                "pergunta": `${state.perguntaUm}`,
+                "resposta": `${state.questionOne}`,
+                "pontuacao": verifyQuestions(state.questionOne)
+            },
+        ]
+    }
+
+    // interface Avaliacao [
+    //     pergunta: string;
+    //     resposta: string;
+    //     pontuacao: number
+    //     // outros campos que o objeto pode ter
+    // ]
+    type Avaliacoes = {
+        pergunta: string;
+        resposta: string;
+        pontuacao: number;
+    }
+    
+
+    const avaliacoesAll: Avaliacoes[] = []
+
     useEffect(() => {
-        if (state.name === '') {
+        if (state.nome === '') {
             navigate('/')
         } else {
             dispatch({
@@ -19,24 +75,64 @@ const FormStep6 = () => {
             })
         }
 
-    }, [state.name, dispatch, navigate])
+    }, [state.nome, dispatch, navigate])
 
-    const handleNextStep = () => {
-        // if (state.necessidadesEspec === 'Sim') {
-        console.log(state)
-        // } else {
-        //     alert('Preencha os dados')
-        // }
+    const handleNextStep = async () => {
+        const avaliacoes_temp: Avaliacoes =
+        {
+            "pergunta": `${state.perguntaUm}`,
+            "resposta": `${state.questionOne}`,
+            "pontuacao": verifyQuestions(state.questionOne)
+        }
+        
+        avaliacoesAll.push(avaliacoes_temp)
+
+        console.log(avaliacoesAll)
+
+        try {
+            const response = await fetch("http://62.72.24.154:8082/api/alunos", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(dataForm),
+            });
+      
+            if (response.ok) {
+              console.log("Dados enviados com sucesso");
+            } else {
+              console.error("Erro ao enviar dados");
+            }
+          } catch (error) {
+            console.error("Erro de rede:", error);
+          }
+
+        navigate('/stepFinish')
     }
 
-    const questionOne = (questionOne: string) => {
+    const questionOne = (questionOne: string, perguntaUm: string) => {
         dispatch({
             type: FormActions.setQuestionOne,
             payload: questionOne
         })
+
+        console.log(perguntaUm)
+
+        dispatch({
+            type: FormActions.setPerguntaUm,
+            payload: perguntaUm
+        })
     }
 
     const questionSecond = (questionSecond: string) => {
+        const avaliacoes_temp: Avaliacoes =
+        {
+            "pergunta": "Sabe Seu nome ?",
+            "resposta": `${questionSecond}`,
+            "pontuacao": verifyQuestions(questionSecond)
+        }
+        avaliacoesAll.push(avaliacoes_temp)
+
         dispatch({
             type: FormActions.setQuestionSecond,
             payload: questionSecond
@@ -44,6 +140,14 @@ const FormStep6 = () => {
     }
 
     const questionThird = (questionThird: string) => {
+        const avaliacoes_temp =
+        {
+            "pergunta": "Sabe Seu nome ?",
+            "resposta": `${questionThird}`,
+            "pontuacao": `${verifyQuestions(questionThird)}`
+        }
+        avaliacoesAll.push(avaliacoes_temp)
+
         dispatch({
             type: FormActions.setQuestionThird,
             payload: questionThird
@@ -51,6 +155,14 @@ const FormStep6 = () => {
     }
 
     const questionFourth = (questionFourth: string) => {
+        const avaliacoes_temp =
+        {
+            "pergunta": "Sabe Seu nome ?",
+            "resposta": `${questionFourth}`,
+            "pontuacao": `${verifyQuestions(questionFourth)}`
+        }
+        avaliacoes_alls.push(avaliacoes_temp)
+
         dispatch({
             type: FormActions.setQuestionFourth,
             payload: questionFourth
@@ -58,6 +170,15 @@ const FormStep6 = () => {
     }
 
     const questionFive = (questionFive: string) => {
+
+        const avaliacoes_temp =
+        {
+            "pergunta": "Sabe Seu nome ?",
+            "resposta": `${questionFive}`,
+            "pontuacao": `${verifyQuestions(questionFive)}`
+        }
+        avaliacoes_alls.push(avaliacoes_temp)
+
         dispatch({
             type: FormActions.setQuestionFive,
             payload: questionFive
@@ -65,27 +186,61 @@ const FormStep6 = () => {
     }
 
     const questionSix = (questionSix: string) => {
+
+        const avaliacoes_temp =
+        {
+            "pergunta": "Sabe Seu nome ?",
+            "resposta": `${questionSix}`,
+            "pontuacao": `${verifyQuestions(questionSix)}`
+        }
+        avaliacoes_alls.push(avaliacoes_temp)
+
         dispatch({
             type: FormActions.setQuestionSix,
             payload: questionSix
         })
     }
 
-    const questionSeven = (questionSecond: string) => {
+    const questionSeven = (questionSeven: string) => {
+
+        const avaliacoes_temp =
+        {
+            "pergunta": "Sabe Seu nome ?",
+            "resposta": `${questionSeven}`,
+            "pontuacao": `${verifyQuestions(questionSeven)}`
+        }
+        avaliacoes_alls.push(avaliacoes_temp)
+
         dispatch({
             type: FormActions.setQuestionSeven,
-            payload: questionSecond
+            payload: questionSeven
         })
     }
 
-    const questionEight = (questionSecond: string) => {
+    const questionEight = (questionEight: string) => {
+        const avaliacoes_temp =
+        {
+            "pergunta": "Sabe Seu nome ?",
+            "resposta": `${questionEight}`,
+            "pontuacao": `${verifyQuestions(questionEight)}`
+        }
+        avaliacoes_alls.push(avaliacoes_temp)
+
         dispatch({
             type: FormActions.setQuestionEight,
-            payload: questionSecond
+            payload: questionEight
         })
     }
 
     const questionNine = (questionNine: string) => {
+        const avaliacoes_temp =
+        {
+            "pergunta": "Sabe Seu nome ?",
+            "resposta": `${questionNine}`,
+            "pontuacao": `${verifyQuestions(questionNine)}`
+        }
+        avaliacoes_alls.push(avaliacoes_temp)
+
         dispatch({
             type: FormActions.setQuestionNine,
             payload: questionNine
@@ -93,6 +248,15 @@ const FormStep6 = () => {
     }
 
     const questionTen = (questionTen: string) => {
+
+        const avaliacoes_temp =
+        {
+            "pergunta": "Sabe Seu nome ?",
+            "resposta": `${questionTen}`,
+            "pontuacao": `${verifyQuestions(questionTen)}`
+        }
+        avaliacoes_alls.push(avaliacoes_temp)
+
         dispatch({
             type: FormActions.setQuestionTen,
             payload: questionTen
@@ -113,22 +277,22 @@ const FormStep6 = () => {
                     <SelectOption
                         title="Sim"
                         description=""
-                        selected={state.questionOne === 'Sim'}
-                        onClick={() => questionOne('Sim')}
+                        selected={state.questionOne === 'S'}
+                        onClick={() => questionOne('S', 'Sabe Seu nome ?')}
                     />
 
                     <SelectOption
                         title="Não"
                         description=""
-                        selected={state.questionOne === 'Não'}
-                        onClick={() => questionOne('Não')}
+                        selected={state.questionOne === 'N'}
+                        onClick={() => questionOne('N', 'Sabe Seu nome ?')}
                     />
 
                     <SelectOption
                         title="As vezes"
                         description=""
-                        selected={state.questionOne === 'As vezes'}
-                        onClick={() => questionOne('As vezes')}
+                        selected={state.questionOne === 'AV'}
+                        onClick={() => questionOne('AV', 'Sabe Seu nome ?')}
                     />
                 </label>
 
@@ -366,7 +530,7 @@ const FormStep6 = () => {
                     />
                 </label>
 
-                <Link to='/step3' className='backButton'>Voltar</Link>
+                <Link to='/step6' className='backButton'>Voltar</Link>
                 <button onClick={handleNextStep}>Próximo</button>
             </C.Container>
         </Theme>

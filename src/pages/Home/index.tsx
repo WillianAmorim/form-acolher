@@ -1,6 +1,6 @@
 import * as C from './styles';
 
-import ImgHome from '../../assets/home-img.png'
+import ImgHomeDesktop from '../../assets/cabecalhoDesktop.png'
 
 import { AiFillInstagram } from "react-icons/ai";
 import { CgFacebook } from "react-icons/cg";
@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <C.Container>
         <C.DivImage>
-            <img src={ImgHome} alt="" />
+            <img src={ImgHomeDesktop} alt="" />
         </C.DivImage>
         <C.DivIcons>
             <AiFillInstagram color='#FFF' size={20}/>

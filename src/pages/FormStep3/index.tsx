@@ -10,7 +10,7 @@ const FormStep3 = () => {
     const { state, dispatch } = useForm();
 
     useEffect(() => {
-        if (state.name === '') {
+        if (state.nome === '') {
             navigate('/')
         } else {
             dispatch({
@@ -19,10 +19,10 @@ const FormStep3 = () => {
             })
         }
 
-    }, [state.name, dispatch, navigate])
+    }, [state.nome, dispatch, navigate])
 
     const handleNextStep = () => {
-        if (state.mother !== '' && state.telefone !== '') {
+        if (state.nome_mae !== '' && state.telefone !== '') {
             navigate('/step4')
         } else {
             alert('Preencha os dados')
@@ -31,7 +31,7 @@ const FormStep3 = () => {
 
     const handleNameMotherChange = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch({
-            type: FormActions.setMother,
+            type: FormActions.setNome_mae,
             payload: e.target.value
         })
     }
@@ -45,7 +45,7 @@ const FormStep3 = () => {
 
     const handleRespFinanChange = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch({
-            type: FormActions.setResponsavelFinan,
+            type: FormActions.setResponsavel_financeiro,
             payload: e.target.value
         })
     }
@@ -71,7 +71,7 @@ const FormStep3 = () => {
                     <input
                         type="text"
                         autoFocus
-                        value={state.mother}
+                        value={state.nome_mae}
                         onChange={handleNameMotherChange}
                     />
                 </label>
@@ -83,7 +83,7 @@ const FormStep3 = () => {
                     <input
                         type="text"
                         autoFocus
-                        value={state.responsavelFinan}
+                        value={state.responsavel_financeiro}
                         onChange={handleRespFinanChange}
                     />
                 </label>

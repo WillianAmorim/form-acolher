@@ -20,6 +20,8 @@ export const DivImage = styled.div`
         max-width: 100vw;
         display: block;
     }
+
+    
 `
 
 export const DivIcons  = styled.div `
@@ -39,6 +41,10 @@ export const SectionItens = styled.div`
     align-items: center;
     padding-top: 50px;
     gap: 20px;
+
+    @media (max-width: 768px) {
+        padding-top: 100px;
+    }
 
     h1 {
         color: #004AAD;

@@ -6,22 +6,24 @@ import { ReactNode } from 'react';
 
 type State = {
     currentStep: number;
-    name: string;
-    level: 0 | 1;
+    nome: string;
     email: string;
-    genero: string;
+    sexo: string;
     idade: string;
     matricula: string;
-    turma: string;
-    turno: string;
-    mother: string;
+    serie_2025: string;
+    modalidade: string;
+    nome_mae: string;
     telefone: string;
-    responsavelFinan: string;
-    necessidadesEspec: string
+    outros: string
+    responsavel_financeiro: string;
+    possui_deficiencia: string
     diagnostico: string;
     comorbidade: string[];
     atendenteTerapeuta: string;
+    avaliacoes: [],
     questionOne: string;
+    perguntaUm: string;
     questionSecond: string;
     questionThird: string;
     questionFourth: string;
@@ -50,22 +52,23 @@ type FormProviderProps = {
 
 const initialData: State = {
     currentStep: 0,
-    name: '',
-    level: 0,
+    nome: '',
     email: '',
-    genero: '',
+    sexo: '',
     idade: '',
     matricula: '',
-    turma: '',
-    turno: '',
-    mother: '',
+    serie_2025: '',
+    modalidade: '',
+    nome_mae: '',
     telefone: '',
-    responsavelFinan: '',
-    necessidadesEspec: '',
+    outros: '',
+    responsavel_financeiro: '',
+    possui_deficiencia: '',
     diagnostico: '',
     comorbidade: [],
     atendenteTerapeuta: '',
     questionOne: '',
+    perguntaUm: '',
     questionSecond: '',
     questionThird: '',
     questionFourth: '',
@@ -84,22 +87,24 @@ const FormContext = createContext<ContextType | undefined>(undefined);
 // Reducer
 export enum FormActions {
     setCurrentStep,
-    setName,
-    setLevel,
+    setNome,
     setEmail,
-    setGenero,
+    setSexo,
     setIdade,
     setMatricula,
-    setTurma,
+    setSerie_2025,
     setTurno,
-    setMother,
+    setModalidade,
+    setNome_mae,
+    setOutros,
     setTelefone,
-    setResponsavelFinan,
-    setNecessidadesEspec,
+    setResponsavel_financeiro,
+    setPossui_deficiencia,
     setDiagnostico,
     setComorbidade,
     setAtendenteTerapeuta,
     setQuestionOne,
+    setPerguntaUm,
     setQuestionSecond,
     setQuestionThird,
     setQuestionFourth,
@@ -116,30 +121,32 @@ const FormReducer = (state: State, action: Action) => {
     switch (action.type) {
         case FormActions.setCurrentStep:
             return { ...state, currentStep: action.payload };
-        case FormActions.setName:
-            return { ...state, name: action.payload };
-        case FormActions.setLevel:
-            return { ...state, level: action.payload };
+        case FormActions.setNome:
+            return { ...state, nome: action.payload };
         case FormActions.setEmail:
             return { ...state, email: action.payload };
-        case FormActions.setGenero:
-            return { ...state, genero: action.payload };
+        case FormActions.setSexo:
+            return { ...state, sexo: action.payload };
         case FormActions.setIdade:
             return { ...state, idade: action.payload };
         case FormActions.setMatricula:
             return { ...state, matricula: action.payload };
-        case FormActions.setTurma:
-            return { ...state, turma: action.payload };
+        case FormActions.setSerie_2025:
+            return { ...state, serie_2025: action.payload };
         case FormActions.setTurno:
             return { ...state, turno: action.payload };
-        case FormActions.setMother:
-            return { ...state, mother: action.payload };
+        case FormActions.setModalidade:
+            return { ...state, modalidade: action.payload };
+        case FormActions.setNome_mae:
+            return { ...state, nome_mae: action.payload };
+        case FormActions.setOutros:
+            return { ...state, outros: action.payload };
         case FormActions.setTelefone:
             return { ...state, telefone: action.payload };
-        case FormActions.setResponsavelFinan:
-            return { ...state, responsavelFinan: action.payload };
-        case FormActions.setNecessidadesEspec:
-            return { ...state, necessidadesEspec: action.payload };
+        case FormActions.setResponsavel_financeiro:
+            return { ...state, responsavel_financeiro: action.payload };
+        case FormActions.setPossui_deficiencia:
+            return { ...state, possui_deficiencia: action.payload };
         case FormActions.setDiagnostico:
             return { ...state, diagnostico: action.payload };
         case FormActions.setComorbidade:
@@ -148,6 +155,8 @@ const FormReducer = (state: State, action: Action) => {
             return { ...state, atendenteTerapeuta: action.payload };
         case FormActions.setQuestionOne:
             return { ...state, questionOne: action.payload };
+            case FormActions.setPerguntaUm:
+            return { ...state, perguntaUm: action.payload };
         case FormActions.setQuestionSecond:
             return { ...state, questionSecond: action.payload };
         case FormActions.setQuestionThird:

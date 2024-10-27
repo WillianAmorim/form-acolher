@@ -1,46 +1,14 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    p {
-        font-size: 13px;
-        color: #B8B8D4;
-    }
-
-    h1 {
-        margin: 0;
-        padding: 0;
-        font-size: 26px;
-    }
-
-    hr {
-        height: 1px;
-        border: 0;
-        background-color: #16195C;
-        margin: 30px 0;
-    }
-
-    label {
-        font-size: 13px;
-        display: block;
-        margin-bottom: 20px;
-
-        input {
-            display: block;
-            margin-top: 7px;
-            box-sizing: border-box;
-            width: 100%;
-            padding: 20px 10px;
-            border: 2px solid #25CD89;
-            border-radius: 10px;
-            color: #FFF;
-            outline: 0;
-            font-size: 15px;
-            background-color: #02044A;
-        }
-    }
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    background-color: #0173DF;
+    height: 100vh;
 
     button {
-        background-color: #25CD89;
+        /* background-color: #25CD89; */
         color: #FFF;
         font-size: 14px;
         font-weight: bold;
@@ -49,12 +17,47 @@ export const Container = styled.div`
         border-radius: 30px;
         cursor: pointer;
         margin-top: 30px;
-    }
 
-    .backButton {
-        font-size: 16px;
-        text-decoration: none;
-        padding: 20px 40px;
-        color: #B8B8D4;
+        background-color: #FF2193;
     }
 `
+
+export const Termos = styled.div`
+    background-color: #FF2193;
+    padding: 10px;
+    margin-bottom: 1px;
+    text-align: center;
+    color: #FFF;
+
+    border-radius: 25px;
+`
+
+export const Card = styled.div`
+    width: 30vw;
+    height: 80vh;
+
+    /* background-color: yellow; */
+`
+
+export const Inputs = styled.div`
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    button {
+        max-width: min-content;
+    }
+    
+`
+
+export const Form = styled.div`
+    min-height: 100%;
+    background-color: #EAECF4;
+    border-radius: 25px;
+    padding: 25px;
+
+    /* img {
+        width: 100%;
+    } */
+`
+

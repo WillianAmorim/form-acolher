@@ -10,7 +10,7 @@ const FormStep4 = () => {
     const { state, dispatch } = useForm();
 
     useEffect(() => {
-        if (state.name === '') {
+        if (state.nome === '') {
             navigate('/')
         } else {
             dispatch({
@@ -19,10 +19,10 @@ const FormStep4 = () => {
             })
         }
 
-    }, [state.name, dispatch, navigate])
+    }, [state.nome, dispatch, navigate])
 
     const handleNextStep = () => {
-        if (state.necessidadesEspec === 'Sim') {
+        if (state.possui_deficiencia === 'Sim') {
             navigate('/step5')
         } else {
             navigate('/stepFinish')
@@ -32,7 +32,7 @@ const FormStep4 = () => {
 
     const selectionOfSpecificNeeds = (matricula: string) => {
         dispatch({
-            type: FormActions.setNecessidadesEspec,
+            type: FormActions.setPossui_deficiencia,
             payload: matricula
         })
     }
@@ -58,15 +58,15 @@ const FormStep4 = () => {
                     <SelectOption
                         title="Sim"
                         description=""
-                        selected={state.necessidadesEspec === 'Sim'}
-                        onClick={() => selectionOfSpecificNeeds('Sim')}
+                        selected={state.possui_deficiencia == 'sim'}
+                        onClick={() => selectionOfSpecificNeeds('sim')}
                     />
 
                     <SelectOption
                         title="Não"
                         description=""
-                        selected={state.necessidadesEspec === 'Não'}
-                        onClick={() => selectionOfSpecificNeeds('Não')}
+                        selected={state.possui_deficiencia == 'nao'}
+                        onClick={() => selectionOfSpecificNeeds('nao')}
                     />
                 </label>
 
