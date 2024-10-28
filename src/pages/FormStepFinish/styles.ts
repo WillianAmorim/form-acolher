@@ -7,19 +7,7 @@ export const Container = styled.div`
     background-color: #0173DF;
     height: 100vh;
 
-    button {
-        /* background-color: #25CD89; */
-        color: #FFF;
-        font-size: 14px;
-        font-weight: bold;
-        padding: 20px 40px;
-        border: 0;
-        border-radius: 30px;
-        cursor: pointer;
-        margin-top: 30px;
-
-        background-color: #FF2193;
-    }
+    
 `
 
 export const Termos = styled.div`
@@ -59,5 +47,21 @@ export const Form = styled.div`
     /* img {
         width: 100%;
     } */
+`
+
+export const Button = styled.button`
+    /* background-color: #25CD89; */
+    background-color: ${(props => props.disabled ? '#ccc' : '#FF2193')}; /* Cinza se desabilitado, azul se habilitado */
+    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+    color: #FFF;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 20px 40px;
+    border: 0;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 30px;
+
+    /* background-color: #FF2193; */
 `
 

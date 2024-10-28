@@ -10,7 +10,7 @@ const FormStep6 = () => {
     const { state, dispatch } = useForm();
 
     useEffect(() => {
-        if (state.name === '') {
+        if (state.nome === '') {
             navigate('/')
         } else {
             dispatch({
@@ -19,15 +19,14 @@ const FormStep6 = () => {
             })
         }
 
-    }, [state.name, dispatch, navigate])
+    }, [state.nome, dispatch, navigate])
 
     const handleNextStep = () => {
-        navigate('/step7')
-        // if (state.necessidadesEspec === 'Sim') {
-        //     console.log(state)
-        // } else {
-        //     alert('Preencha os dados')
-        // }
+        if (state.atendenteTerapeuta !== '') {
+            navigate('/step7')
+        } else {
+            alert('Preencha os dados')
+        }
     }
 
     const therapeuticAttendant = (atendenteTerapeuta: string) => {
@@ -63,7 +62,7 @@ const FormStep6 = () => {
                     />
                 </label>
 
-                <Link to='/step3' className='backButton'>Voltar</Link>
+                <Link to='/step5' className='backButton'>Voltar</Link>
                 <button onClick={handleNextStep}>Próximo</button>
             </C.Container>
         </Theme>

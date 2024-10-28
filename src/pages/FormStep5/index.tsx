@@ -22,7 +22,7 @@ const FormStep5 = () => {
     }, [state.nome, dispatch, navigate])
 
     const handleNextStep = () => {
-        if (state.diagnostico !== '') {
+        if ((state.diagnostico !== '') && (state.comorbidade.length > 0)) {
             navigate('/step6')
         } else {
             alert('Preencha os dados')
@@ -37,7 +37,8 @@ const FormStep5 = () => {
         })
     }
 
-    const handleOutrosChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleChangeOptionOutros = (e: ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.value)
         dispatch({
             type: FormActions.setOutros,
             payload: e.target.value
@@ -54,6 +55,7 @@ const FormStep5 = () => {
         if (newComorbidades.includes('Outros')) {
             if (elementoOutros) {
                 elementoOutros.style.display = 'flex';
+
             }
         } else {
             if (elementoOutros) {
@@ -123,15 +125,15 @@ const FormStep5 = () => {
                         <input
                             type="text"
                             autoFocus
-                        value={state.outros}
-                        onChange={handleOutrosChange}
+                            value={state.outros}
+                            onChange={handleChangeOptionOutros}
                         />
                     </label>
                 </label>
 
 
 
-                <Link to='/step3' className='backButton'>Voltar</Link>
+                <Link to='/step4' className='backButton'>Voltar</Link>
                 <button onClick={handleNextStep}>Próximo</button>
             </C.Container>
         </Theme>

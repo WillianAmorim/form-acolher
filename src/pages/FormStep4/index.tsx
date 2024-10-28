@@ -22,7 +22,9 @@ const FormStep4 = () => {
     }, [state.nome, dispatch, navigate])
 
     const handleNextStep = () => {
-        if (state.possui_deficiencia === 'sim') {
+        if (state.possui_deficiencia === '') {
+            alert('Preencha todos os campos !')
+        }else if (state.possui_deficiencia === 'sim') {
             navigate('/step5')
         } else {
             navigate('/stepFinish')

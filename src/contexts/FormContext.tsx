@@ -21,18 +21,27 @@ type State = {
     diagnostico: string;
     comorbidade: string[];
     atendenteTerapeuta: string;
-    avaliacoes: [],
+    // avaliacoes: [],
     questionOne: string;
     perguntaUm: string;
     questionSecond: string;
+    perguntaDois: string;
     questionThird: string;
+    perguntaTres: string;
     questionFourth: string;
+    perguntaQuatro: string;
     questionFive: string;
+    perguntaCinco: string;
     questionSix: string;
+    perguntaSeis: string;
     questionSeven: string;
+    perguntaSete: string;
     questionEight: string;
+    perguntaOito: string;
     questionNine: string;
+    perguntaNove: string;
     questionTen: string;
+    perguntaDez: string;
     unidade: string
 }
 
@@ -70,14 +79,23 @@ const initialData: State = {
     questionOne: '',
     perguntaUm: '',
     questionSecond: '',
+    perguntaDois: '',
     questionThird: '',
+    perguntaTres: '',
     questionFourth: '',
+    perguntaQuatro: '',
     questionFive: '',
+    perguntaCinco: '',
     questionSix: '',
+    perguntaSeis: '',
     questionSeven: '',
+    perguntaSete: '',
     questionEight: '',
+    perguntaOito: '',
     questionNine: '',
+    perguntaNove: '',
     questionTen: '',
+    perguntaDez: '',
     unidade: '',
 
 }
@@ -106,14 +124,23 @@ export enum FormActions {
     setQuestionOne,
     setPerguntaUm,
     setQuestionSecond,
+    setPerguntaDois,
     setQuestionThird,
+    setPerguntaTres,
     setQuestionFourth,
+    setPerguntaQuatro,
     setQuestionFive,
+    setPerguntaCinco,
     setQuestionSix,
+    setPerguntaSeis,
     setQuestionSeven,
+    setPerguntaSete,
     setQuestionEight,
+    setPerguntaOito,
     setQuestionNine,
+    setPerguntaNove,
     setQuestionTen,
+    setPerguntaDez,
     setUnidade,
 }
 
@@ -155,26 +182,44 @@ const FormReducer = (state: State, action: Action) => {
             return { ...state, atendenteTerapeuta: action.payload };
         case FormActions.setQuestionOne:
             return { ...state, questionOne: action.payload };
-            case FormActions.setPerguntaUm:
+        case FormActions.setPerguntaUm:
             return { ...state, perguntaUm: action.payload };
         case FormActions.setQuestionSecond:
             return { ...state, questionSecond: action.payload };
+        case FormActions.setPerguntaDois:
+            return { ...state, perguntaDois: action.payload };
         case FormActions.setQuestionThird:
             return { ...state, questionThird: action.payload };
+        case FormActions.setPerguntaTres:
+            return { ...state, perguntaTres: action.payload };
         case FormActions.setQuestionFourth:
             return { ...state, questionFourth: action.payload };
+        case FormActions.setPerguntaQuatro:
+            return { ...state, perguntaQuatro: action.payload };
         case FormActions.setQuestionFive:
             return { ...state, questionFive: action.payload };
+        case FormActions.setPerguntaCinco:
+            return { ...state, perguntaCinco: action.payload };
         case FormActions.setQuestionSix:
             return { ...state, questionSix: action.payload };
+        case FormActions.setPerguntaSeis:
+            return { ...state, perguntaSeis: action.payload };
         case FormActions.setQuestionSeven:
             return { ...state, questionSeven: action.payload };
+        case FormActions.setPerguntaSete:
+            return { ...state, perguntaSete: action.payload };
         case FormActions.setQuestionEight:
             return { ...state, questionEight: action.payload };
+        case FormActions.setPerguntaOito:
+            return { ...state, perguntaOito: action.payload };
         case FormActions.setQuestionNine:
             return { ...state, questionNine: action.payload };
+        case FormActions.setPerguntaNove:
+            return { ...state, perguntaNove: action.payload };
         case FormActions.setQuestionTen:
             return { ...state, questionTen: action.payload };
+        case FormActions.setPerguntaDez:
+            return { ...state, perguntaDez: action.payload };
         case FormActions.setUnidade:
             return { ...state, unidade: action.payload };
         default:

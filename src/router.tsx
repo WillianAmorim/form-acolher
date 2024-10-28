@@ -9,8 +9,24 @@ import FormStep7 from './pages/FormStep7';
 import Login from './pages/Login';
 import Home from './pages/Home/index'
 import FormStepFinish from './pages/FormStepFinish';
+import { useEffect } from 'react';
 
 const Router = () => {
+
+  useEffect(() => {
+    const handleBeforeUnload = (e: { returnValue: string; }) => {
+      const confirmationMessage = 'Você perderá os dados preenchidos. Deseja continuar?';
+      e.returnValue = confirmationMessage;
+      return confirmationMessage;
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
