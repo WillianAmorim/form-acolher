@@ -1,8 +1,10 @@
 import * as C from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useForm, FormActions } from '../../contexts/FormContext'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { verifyQuestions } from '../../functionVerify';
+
+import PuppetAcolher from '../../assets/puppetAcolher.png'
 
 const FormStepFinish = () => {
     const navigate = useNavigate();
@@ -10,6 +12,13 @@ const FormStepFinish = () => {
 
     const [isTermoChecked, setTermoChecked] = useState(false);
     const [isConcordoChecked, setConcordoChecked] = useState(false);
+    // const [poupopOn, setPoupopOn] = useState(false);
+    // const divRef = useRef<HTMLDivElement>(null); // Referência para a div
+
+    // const handlePoupou = () => {
+    //     console.log('clicou')
+    //     setPoupopOn(!poupopOn);
+    // }
 
     const handleTermoChange = () => {
         setTermoChecked(!isTermoChecked);
@@ -18,6 +27,23 @@ const FormStepFinish = () => {
     const handleConcordoChange = () => {
         setConcordoChecked(!isConcordoChecked);
     };
+
+    // const handleClickOutside = (e: MouseEvent) => {
+    //     // Verifica se o clique foi fora da div
+    //     if (divRef.current && !divRef.current.contains(e.target as Node)) {
+    //         setPoupopOn(false); // Altera o estado para inativo
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     // Adiciona o evento de clique ao document
+    //     document.addEventListener('mousedown', handlePoupou);
+
+    //     // Remove o evento quando o componente é desmontado
+    //     return () => {
+    //         document.removeEventListener('mousedown', handlePoupou);
+    //     };
+    // }, []);
 
     const isButtonDisabled = !(isTermoChecked && isConcordoChecked);
 
@@ -32,7 +58,7 @@ const FormStepFinish = () => {
         "responsavel_financeiro": `${state.responsavel_financeiro}`,
         "telefone": `${state.telefone}`,
         "email": `${state.email}`,
-        "possui_deficiencia": state.possui_deficiencia == 'sim' ? true:false,
+        "possui_deficiencia": state.possui_deficiencia == 'sim' ? true : false,
         "diagnosticos": [
             {
                 "diagnostico": state.diagnostico,
@@ -139,13 +165,14 @@ const FormStepFinish = () => {
             <C.Card>
                 <C.Termos>Termos</C.Termos>
                 <C.Form>
-                    {/* <img src={PuppetAcolher} alt="" /> */}
+                    <img src={PuppetAcolher} alt="Oi" />
                     <C.Inputs>
                         <label>
                             <input
                                 type="checkbox"
                                 checked={isTermoChecked}
                                 onChange={handleTermoChange}
+                                // onClick={handlePoupou}
                             />
                             Termo de livre esclarecimento
                         </label>
@@ -157,6 +184,10 @@ const FormStepFinish = () => {
                             />
                             Li e concordo com os termos
                         </label>
+
+                        {/* <C.DivPoupop ref={divRef} style={{display: poupopOn ? 'flex' : 'none', }}>
+                            Ao assinar este termo, assumo total responsabilidade pela veracidade dos dados fornecidos e aceito todas as condições aqui estabelecidas, pois reconheço a preocupação da escola Acolher em preparar o melhor ambiente de aprendizado e inclusão para meu filho.
+                        </C.DivPoupop> */}
                         <C.Button onClick={handleFinishClick} disabled={isButtonDisabled}>Finalizar</C.Button>
                     </C.Inputs>
                 </C.Form>

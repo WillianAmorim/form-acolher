@@ -21,8 +21,12 @@ export const Termos = styled.div`
 `
 
 export const Card = styled.div`
-    width: 30vw;
+    min-width: 30vw;
     height: 80vh;
+
+    @media (max-width: 768px) {
+        min-width: 90vw;
+    }
 
     /* background-color: yellow; */
 `
@@ -31,6 +35,12 @@ export const Inputs = styled.div`
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    gap: 5px;
+
+    label {
+        display: flex;
+        gap: 5px;
+    }
 
     button {
         max-width: min-content;
@@ -44,9 +54,14 @@ export const Form = styled.div`
     border-radius: 25px;
     padding: 25px;
 
-    /* img {
-        width: 100%;
-    } */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+        width: auto;
+        height: 200px;
+    }
 `
 
 export const Button = styled.button`
@@ -64,4 +79,14 @@ export const Button = styled.button`
 
     /* background-color: #FF2193; */
 `
+
+export const DivPoupop = styled.div`
+    position: absolute;
+
+    background-color: white;
+    width: 350px;
+    padding: 25px;
+    border-radius: 25px;
+    left: 510px;
+`   
 
