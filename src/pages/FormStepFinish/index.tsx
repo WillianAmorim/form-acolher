@@ -118,7 +118,6 @@ const FormStepFinish = () => {
 
 
     const handleFinishClick = async () => {
-        const senha = 'ABCD104050'
 
         if (!isButtonDisabled) {
             alert("Dados enviados com sucesso!");
@@ -142,8 +141,8 @@ const FormStepFinish = () => {
                     <C.ContainerSenha>
                         {
                             Swal.fire({
-                                title: `${response.original.message}`,
-                                text: `Sua senha é ${response.original.senha_gerada}, apresente-a na secretaria`,
+                                title: `${response.data.original.message}`,
+                                text: `Sua senha é ${response.data.original.senha_gerada}, apresente-a na secretaria`,
                                 icon: "success"
                             })
                         }
