@@ -127,7 +127,7 @@ const FormStepFinish = () => {
                     "Content-Type": "application/json",
                 },
             });
-            console.log(response.data);
+            console.log(response.data.original.senha_gerada);
             // setUsers(response.data);  // Salva os dados dos usuários no estado
             console.log(response.data)
         } catch (err) {
