@@ -4,7 +4,13 @@ import { useForm, FormActions } from '../../contexts/FormContext'
 import { useEffect, useState } from 'react';
 import { verifyQuestions } from '../../functionVerify';
 
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
+
+
 import PuppetAcolher from '../../assets/puppetAcolher.png'
+import axios from 'axios';
+
 
 const FormStepFinish = () => {
     const navigate = useNavigate();
@@ -12,13 +18,6 @@ const FormStepFinish = () => {
 
     const [isTermoChecked, setTermoChecked] = useState(false);
     const [isConcordoChecked, setConcordoChecked] = useState(false);
-    // const [poupopOn, setPoupopOn] = useState(false);
-    // const divRef = useRef<HTMLDivElement>(null); // Referência para a div
-
-    // const handlePoupou = () => {
-    //     console.log('clicou')
-    //     setPoupopOn(!poupopOn);
-    // }
 
     const handleTermoChange = () => {
         setTermoChecked(!isTermoChecked);
@@ -28,22 +27,16 @@ const FormStepFinish = () => {
         setConcordoChecked(!isConcordoChecked);
     };
 
-    // const handleClickOutside = (e: MouseEvent) => {
-    //     // Verifica se o clique foi fora da div
-    //     if (divRef.current && !divRef.current.contains(e.target as Node)) {
-    //         setPoupopOn(false); // Altera o estado para inativo
-    //     }
-    // };
+    const ShowTermos = () => {
+        console.log('cliquei')
 
-    // useEffect(() => {
-    //     // Adiciona o evento de clique ao document
-    //     document.addEventListener('mousedown', handlePoupou);
-
-    //     // Remove o evento quando o componente é desmontado
-    //     return () => {
-    //         document.removeEventListener('mousedown', handlePoupou);
-    //     };
-    // }, []);
+        Swal.fire({
+            title: 'Termo',
+            text: 'Ao assinar este termo, assumo total responsabilidade pela veracidade dos dados fornecidos e aceito todas as condições aqui estabelecidas, pois reconheço a preocupação da escola Acolher em preparar o melhor ambiente de aprendizado e inclusão para meu filho.',
+            icon: 'question',
+            confirmButtonText: 'Fechar'
+        })
+    }
 
     const isButtonDisabled = !(isTermoChecked && isConcordoChecked);
 
@@ -129,22 +122,16 @@ const FormStepFinish = () => {
         }
 
         try {
-            const response = await fetch("http://62.72.24.154:8082/api/alunos", {
-                method: "POST",
+            const response = await axios.post('http://62.72.24.154:8082/api/alunos', JSON.stringify(dataForm), {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(dataForm),
             });
-            console.log(dataForm)
-
-            if (response.ok) {
-                console.log("Dados enviados com sucesso");
-            } else {
-                console.error("Erro ao enviar dados");
-            }
-        } catch (error) {
-            console.error("Erro de rede:", error);
+            console.log(response.data);
+            // setUsers(response.data);  // Salva os dados dos usuários no estado
+            console.log(response.data)
+        } catch (err) {
+            console.log(err)
         }
     };
 
@@ -162,32 +149,35 @@ const FormStepFinish = () => {
 
     return (
         <C.Container>
-            <C.Card>
+            <C.Card id='container-card'>
                 <C.Termos>Termos</C.Termos>
                 <C.Form>
                     <img src={PuppetAcolher} alt="Oi" />
                     <C.Inputs>
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={isTermoChecked}
-                                onChange={handleTermoChange}
-                                // onClick={handlePoupou}
-                            />
-                            Termo de livre esclarecimento
-                        </label>
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={isConcordoChecked}
-                                onChange={handleConcordoChange}
-                            />
-                            Li e concordo com os termos
-                        </label>
+                        <div>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={isTermoChecked}
+                                    onChange={handleTermoChange}
+                                />
+                            </label>
 
-                        {/* <C.DivPoupop ref={divRef} style={{display: poupopOn ? 'flex' : 'none', }}>
-                            Ao assinar este termo, assumo total responsabilidade pela veracidade dos dados fornecidos e aceito todas as condições aqui estabelecidas, pois reconheço a preocupação da escola Acolher em preparar o melhor ambiente de aprendizado e inclusão para meu filho.
-                        </C.DivPoupop> */}
+                            <p onClick={ShowTermos}>Termo de livre esclarecimento</p>
+                        </div>
+
+                        <div>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={isConcordoChecked}
+                                    onChange={handleConcordoChange}
+                                />
+                            </label>
+
+                            <p>Li e concordo com os termos</p>
+                        </div>
+
                         <C.Button onClick={handleFinishClick} disabled={isButtonDisabled}>Finalizar</C.Button>
                     </C.Inputs>
                 </C.Form>

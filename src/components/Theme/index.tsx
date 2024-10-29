@@ -22,7 +22,7 @@ export const Theme = ({ children }: Props) => {
                             title="Pessoal"
                             description="Se identifique"
                             icon="profile"
-                            path="/"
+                            path="/step1"
                             active={state.currentStep == 1}
                         />
 
