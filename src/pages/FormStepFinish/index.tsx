@@ -28,7 +28,6 @@ const FormStepFinish = () => {
     };
 
     const ShowTermos = () => {
-        console.log('cliquei')
 
         Swal.fire({
             title: 'Termo',
@@ -120,7 +119,7 @@ const FormStepFinish = () => {
     const handleFinishClick = async () => {
 
         if (!isButtonDisabled) {
-            alert("Dados enviados com sucesso!");
+            alert("Dados enviados com sucesso2!");
         }
 
         try {
@@ -134,7 +133,6 @@ const FormStepFinish = () => {
             if (containerCard) {
                 containerCard.style.display = 'none'
             }
-            console.log(response)
             if (response.status === 201) {
                
                 {
