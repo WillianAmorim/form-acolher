@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: react-form-acolher
     ports:
-      - "8081:80"
+      - "80:80"
     networks:
       - react_network
 networks:
