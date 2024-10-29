@@ -116,20 +116,59 @@ const FormStepFinish = () => {
         ]
     }
 
+
     const handleFinishClick = async () => {
+        const senha = 'ABCD104050'
+
         if (!isButtonDisabled) {
             alert("Dados enviados com sucesso!");
         }
 
         try {
-            const response = await axios.post('http://62.72.24.154:8082/api/alunos', JSON.stringify(dataForm), {
+            const response = await axios.post('http://62.72.24.154:8082/api/alunos', dataForm, {
                 headers: {
                     "Content-Type": "application/json",
                 },
             });
-            console.log(response.data.original.senha_gerada);
+
+            const containerCard = document.getElementById('container-card')
+            if (containerCard) {
+                containerCard.style.display = 'none'
+            }
+
+            if (response.status === 200) {
+                console.log("Dados enviados com sucesso")
+                {
+                    <C.ContainerSenha>
+                        {
+                            Swal.fire({
+                                title: `${response.original.message}`,
+                                text: `Sua senha é ${response.original.senha_gerada}, apresente-a na secretaria`,
+                                icon: "success"
+                            })
+                        }
+                    </C.ContainerSenha>
+
+                    setTimeout(() => {
+                        navigate('/')
+                    }, 5000);
+                }
+            } else {
+                <C.ContainerSenha>
+                    {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops... Dados incorretos !",
+                            text: "Confirme as informações antes de enviar!",
+                            footer: '<a href="/step1">Retornar a página inicial do formulário ?</a>'
+                          })
+                    }
+                </C.ContainerSenha>
+            }
+            // console.log(response)
+            // console.log(response.data.original.senha_gerada);
             // setUsers(response.data);  // Salva os dados dos usuários no estado
-            console.log(response.data)
+            // console.log(response.data)
         } catch (err) {
             console.log(err)
         }
