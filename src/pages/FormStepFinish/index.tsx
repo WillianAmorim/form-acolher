@@ -1,7 +1,7 @@
 import * as C from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useForm, FormActions } from '../../contexts/FormContext'
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { verifyQuestions } from '../../functionVerify';
 
 import PuppetAcolher from '../../assets/puppetAcolher.png'
