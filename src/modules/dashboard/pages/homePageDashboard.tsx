@@ -33,13 +33,18 @@ const HomePageDashboard = () => {
   // useEffect para filtrar os dados com base no termo de pesquisa
   useEffect(() => {
     const filtered = data.filter((item) => {
-      const email = item.email || '';
+      const email = item.senha_cadastro || '';
       return email.toLowerCase().includes(search.toLowerCase()); // Filtra pelo email
     });
     setFilteredData(filtered);
   }, [search, data]);
 
   const columns = [
+    {
+      name: 'Senha',
+      selector: (row) => row.senha_cadastro,
+      sortable: true,
+    },
     {
       name: 'Nome',
       selector: (row) => row.nome,

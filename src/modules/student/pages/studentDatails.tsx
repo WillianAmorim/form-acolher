@@ -39,6 +39,7 @@ const StudentDetails = () => {
           <div className="bg-primary absolute top-0 w-full left-0 rounded-t-lg flex justify-center py-1">
             <p className='text-white roboto-medium'>Informações do Aluno</p>
           </div>
+     
           <p className='roboto-light text-gray-700 pt-5'><strong>Nome:</strong> {student.nome}</p>
           <p className='roboto-light text-gray-700'><strong>Sexo:</strong> {student.idade}</p>
           <p className='roboto-light text-gray-700'><strong>Tipo de cadastro:</strong> {student.sexo}</p>
@@ -60,7 +61,7 @@ const StudentDetails = () => {
                 <div key={index} className="p-2 border-b border-gray-200 pt-5">
                   <p className='roboto-light text-gray-700'><strong>Diagnóstico:</strong> {diagnostico.diagnostico}</p>
                   <p className='roboto-light text-gray-700'><strong>Epilepsia:</strong> {diagnostico.epilepsia ? "sim" : "Nao"}</p>
-                  <p className='roboto-light text-gray-700'><strong>deficiencia_intelectual:</strong> {diagnostico.deficiencia_intelectual? "sim" : "Nao"}</p>
+                  <p className='roboto-light text-gray-700'><strong>Deficiência Intelectual:</strong> {diagnostico.deficiencia_intelectual? "sim" : "Nao"}</p>
                   <p className='roboto-light text-gray-700'><strong>Alergia:</strong> {diagnostico.alergia ? "sim" : "Nao"}</p>
                   <p className='roboto-light text-gray-700'><strong>Outros:</strong> {diagnostico.outros}</p>
                   <p className='roboto-light text-gray-700'><strong>Atendente Terapeutico:</strong> {diagnostico.atendente_terapeutico ? "sim" : "Nao"}</p>
