@@ -37,6 +37,11 @@ export const Inputs = styled.div`
     min-height: 100%;
     gap: 5px;
 
+    div {
+        display: flex;
+        gap: 5px;
+    }
+
     label {
         display: flex;
         gap: 5px;
@@ -76,8 +81,6 @@ export const Button = styled.button`
     border-radius: 30px;
     cursor: pointer;
     margin-top: 30px;
-
-    /* background-color: #FF2193; */
 `
 
 export const DivPoupop = styled.div`
@@ -88,5 +91,9 @@ export const DivPoupop = styled.div`
     padding: 25px;
     border-radius: 25px;
     left: 510px;
-`   
+`  
+
+export const ContainerSenha = styled.div`
+    display: none;
+`
 
