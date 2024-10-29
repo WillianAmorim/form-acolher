@@ -134,9 +134,9 @@ const FormStepFinish = () => {
             if (containerCard) {
                 containerCard.style.display = 'none'
             }
-
-            if (response.status === 200) {
-                console.log("Dados enviados com sucesso")
+            console.log(response)
+            if (response.status === 201) {
+               
                 {
                     <C.ContainerSenha>
                         {
@@ -152,7 +152,8 @@ const FormStepFinish = () => {
                         navigate('/')
                     }, 5000);
                 }
-            } else {
+            } 
+            else {
                 <C.ContainerSenha>
                     {
                         Swal.fire({
@@ -167,7 +168,7 @@ const FormStepFinish = () => {
             // console.log(response)
             // console.log(response.data.original.senha_gerada);
             // setUsers(response.data);  // Salva os dados dos usuários no estado
-            // console.log(response.data)
+           // console.log(response.data)
         } catch (err) {
             console.log(err)
         }
