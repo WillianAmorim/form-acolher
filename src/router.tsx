@@ -9,6 +9,8 @@ import FormStep7 from './pages/FormStep7';
 import Login from './pages/Login';
 import Home from './pages/Home/index'
 import FormStepFinish from './pages/FormStepFinish';
+import HomePageDashboard from './pages/dashboard/dashboard.tsx'
+import StudentDetails from './pages/studentDatails/studentDatails';
 import { useEffect } from 'react';
 
 const Router = () => {
@@ -41,6 +43,8 @@ const Router = () => {
         <Route path="/step7" element={<FormStep7 />} />
         <Route path="/login" element={<Login />} />
         <Route path="/stepFinish" element={<FormStepFinish />} />
+        <Route path="/dashboard" element={<HomePageDashboard />} />
+        <Route path="/aluno/:id" element={<StudentDetails />} />
       </Routes>
     </BrowserRouter>
   );
