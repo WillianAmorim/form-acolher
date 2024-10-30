@@ -82,6 +82,7 @@ const FormStep1 = () => {
                         autoFocus
                         value={state.nome}
                         onChange={handleNameChange}
+                        required
                     />
                 </label>
 

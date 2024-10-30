@@ -42,7 +42,8 @@ type State = {
     perguntaNove: string;
     questionTen: string;
     perguntaDez: string;
-    unidade: string
+    unidade: string;
+    resetForm: () => void; // Incluindo a função resetForm no tipo do contexto
 }
 
 type Action = {
@@ -142,6 +143,7 @@ export enum FormActions {
     setQuestionTen,
     setPerguntaDez,
     setUnidade,
+    resetForm // Adicionada ação de reset
 }
 
 const FormReducer = (state: State, action: Action) => {
@@ -222,6 +224,8 @@ const FormReducer = (state: State, action: Action) => {
             return { ...state, perguntaDez: action.payload };
         case FormActions.setUnidade:
             return { ...state, unidade: action.payload };
+        case FormActions.resetForm:
+            return initialData; // Reseta para o estado inicial
         default:
             return state;
     }
@@ -232,7 +236,15 @@ const FormReducer = (state: State, action: Action) => {
 export const FormProvider = ({ children }: FormProviderProps) => {
 
     const [state, dispatch] = useReducer(FormReducer, initialData)
-    const value = { state, dispatch }
+    
+    const resetForm = () => {
+        dispatch({
+            type: FormActions.resetForm,
+            payload: undefined
+        }); // Despacha a ação de reset
+    };
+    
+    const value = { state, dispatch, resetForm }; // Inclui resetForm no contexto
 
     return (
         <FormContext.Provider value={value}>

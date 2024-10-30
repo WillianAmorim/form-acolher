@@ -14,7 +14,8 @@ import axios from 'axios';
 
 const FormStepFinish = () => {
     const navigate = useNavigate();
-    const { state, dispatch } = useForm();
+    const { state, dispatch, resetForm } = useForm();
+
 
     const [isTermoChecked, setTermoChecked] = useState(false);
     const [isConcordoChecked, setConcordoChecked] = useState(false);
@@ -116,10 +117,13 @@ const FormStepFinish = () => {
     }
 
 
+
+
     const handleFinishClick = async () => {
 
-        if (!isButtonDisabled) {
-            alert("Dados enviados com sucesso!");
+        const handlePageInitial = () => {
+            resetForm(); // Limpa o contexto
+            navigate('/')
         }
 
         try {
@@ -128,45 +132,30 @@ const FormStepFinish = () => {
                     "Content-Type": "application/json",
                 },
             });
-                
+
             const containerCard = document.getElementById('container-card')
             if (containerCard) {
                 containerCard.style.display = 'none'
             }
             if (response.status === 201) {
-               
-                {
-                    <C.ContainerSenha>
-                        {
-                            Swal.fire({
-                                title: `${response.data.original.message}`,
-                                text: `Sua senha é ${response.data.original.senha_gerada}, apresente-a na secretaria`,
-                                icon: "success"
-                            })
-                        }
-                    </C.ContainerSenha>
-
-                    setTimeout(() => {
-                        navigate('/')
-                    }, 5000);
-                }
-            } 
-            else {
-                <C.ContainerSenha>
-                    {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops... Dados incorretos !",
-                            text: "Confirme as informações antes de enviar!",
-                            footer: '<a href="/step1">Retornar a página inicial do formulário ?</a>'
-                          })
+                Swal.fire({
+                    title: `${response.data.original.message}`,
+                    html: `Sua senha é <b>${response.data.original.senha_gerada}</b>, apresente-a na secretaria`,
+                    icon: "success"
+                }).then((result: { isConfirmed: any; }) => {
+                    if (result.isConfirmed) {
+                        handlePageInitial();
                     }
-                </C.ContainerSenha>
+                });
             }
-            // console.log(response)
-            // console.log(response.data.original.senha_gerada);
-            // setUsers(response.data);  // Salva os dados dos usuários no estado
-           // console.log(response.data)
+            else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops... Dados incorretos !",
+                    text: "Confirme as informações antes de enviar!",
+                    footer: '<a href="/step1">Retornar a página inicial do formulário ?</a>'
+                })
+            }
         } catch (err) {
             console.log(err)
         }
