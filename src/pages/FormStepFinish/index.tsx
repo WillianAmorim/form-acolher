@@ -123,7 +123,7 @@ const FormStepFinish = () => {
         }
 
         try {
-            const response = await axios.post('http://nginx_server:8082/api/alunos', dataForm, {
+            const response = await axios.post('http://localhost:8082/api/alunos', dataForm, {
                 headers: {
                     "Content-Type": "application/json",
                 },
