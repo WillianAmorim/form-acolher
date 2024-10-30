@@ -1,12 +1,53 @@
 services:
-  react-app:
+  # Serviço do PHP
+  app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: react-form-acolher
-    ports:
-      - "8081:80"
+    container_name: formulario-pre-matricula-backend
+    volumes:
+      - ./:/var/www
     networks:
-      - react_network
+      - laravel_network
+      - formulario-cadastro  # Conecta à rede externa
+    depends_on:
+      - db
+
+  # Serviço do Nginx
+  webserver:
+    image: nginx:alpine
+    container_name: nginx_server
+    volumes:
+      - ./:/var/www
+      - ./.docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8082:80"
+    networks:
+      - laravel_network
+      - formulario-cadastro  # Conecta à rede externa
+    depends_on:
+      - app
+
+  # Serviço do MySQL
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: formulario-pre-matricula
+      MYSQL_PASSWORD: root
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3309:3306"
+    networks:
+      - laravel_network
+      - formulario-cadastro  # Conecta à rede externa
+
 networks:
-  react_network:
+  laravel_network:
+  formulario-cadastro:
+    external: true  # Declara que a rede já existe
+
+volumes:
+  dbdata:
