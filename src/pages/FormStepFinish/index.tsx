@@ -119,7 +119,7 @@ const FormStepFinish = () => {
     const handleFinishClick = async () => {
 
         if (!isButtonDisabled) {
-            alert("Dados enviados com sucesso2!");
+            alert("Dados enviados com sucesso!");
         }
 
         try {
