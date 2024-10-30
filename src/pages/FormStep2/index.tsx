@@ -66,8 +66,8 @@ const FormStep2 = () => {
                     <SelectOption
                         title="Vespertino"
                         description=""
-                        selected={state.modalidade === 'verpertino'}
-                        onClick={() => manageShift('verpertino')}
+                        selected={state.modalidade === 'vespertino'}
+                        onClick={() => manageShift('vespertino')}
                     />
                 </label>
 
