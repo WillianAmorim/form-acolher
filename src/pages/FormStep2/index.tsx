@@ -59,8 +59,8 @@ const FormStep2 = () => {
                     <SelectOption
                         title="Matutino"
                         description=""
-                        selected={state.modalidade === 'parcial'}
-                        onClick={() => manageShift('parcial')}
+                        selected={state.modalidade === 'matutino'}
+                        onClick={() => manageShift('matutino')}
                     />
 
                     <SelectOption
