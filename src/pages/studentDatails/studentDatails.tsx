@@ -34,57 +34,59 @@ const StudentDetails = () => {
         Voltar ao Dashboard
       </Link>
       </section>
-      <section className='flex items-start gap-3 p-3 '>
-        <div className="p-5 bg-white rounded-lg h-[430px] shadow shadow-light-300 relative">
-          <div className="bg-primary absolute top-0 w-full left-0 rounded-t-lg flex justify-center py-1">
-            <p className='text-white roboto-medium'>Informações do Aluno</p>
+      <section className='flex flex-col w-full items-start gap-3 p-3 '>
+        <div className="flex flex-col md:flex-row items-start w-full gap-5">
+          <div className="p-5 bg-white rounded-lg h-[350px] w-full shadow shadow-light-300 relative">
+            <div className="bg-primary absolute top-0 w-full left-0 rounded-t-lg flex justify-center py-1">
+              <p className='text-white roboto-medium'>Informações do Aluno</p>
+            </div>
+      
+            <p className='roboto-light text-gray-700 pt-5'><strong>Nome:</strong> {student.nome}</p>
+            <p className='roboto-light text-gray-700'><strong>Sexo:</strong> {student.idade}</p>
+            <p className='roboto-light text-gray-700'><strong>Tipo de cadastro:</strong> {student.sexo}</p>
+            <p className='roboto-light text-gray-700'><strong>Série a cursar em 2025:</strong> {student.serie_2025}</p>
+            <p className='roboto-light text-gray-700'><strong>Modalidade:</strong> {student.modalidade}</p>
+            <p className='roboto-light text-gray-700'><strong>Turno:</strong> {student.turno}</p>
+            <p className='roboto-light text-gray-700'><strong>Nome da Mãe:</strong> {student.nome_mae}</p>
+            <p className='roboto-light text-gray-700'><strong>Responsável Financeiro:</strong> {student.responsavel_financeiro}</p>
+            <p className='roboto-light text-gray-700'><strong>Telefone:</strong> {student.telefone}</p>
+            <p className='roboto-light text-gray-700'><strong>E-mail:</strong> {student.email}</p>
+            <p className='roboto-light text-gray-700'><strong>Possui deficiência?</strong> {student.possui_deficiencia ? "Sim" : "Não"}</p>
           </div>
-     
-          <p className='roboto-light text-gray-700 pt-5'><strong>Nome:</strong> {student.nome}</p>
-          <p className='roboto-light text-gray-700'><strong>Sexo:</strong> {student.idade}</p>
-          <p className='roboto-light text-gray-700'><strong>Tipo de cadastro:</strong> {student.sexo}</p>
-          <p className='roboto-light text-gray-700'><strong>Série a cursar em 2025:</strong> {student.serie_2025}</p>
-          <p className='roboto-light text-gray-700'><strong>Modalidade:</strong> {student.modalidade}</p>
-          <p className='roboto-light text-gray-700'><strong>Turno:</strong> {student.turno}</p>
-          <p className='roboto-light text-gray-700'><strong>Nome da Mãe:</strong> {student.nome_mae}</p>
-          <p className='roboto-light text-gray-700'><strong>Responsável Financeiro:</strong> {student.responsavel_financeiro}</p>
-          <p className='roboto-light text-gray-700'><strong>Telefone:</strong> {student.telefone}</p>
-          <p className='roboto-light text-gray-700'><strong>E-mail:</strong> {student.email}</p>
-          <p className='roboto-light text-gray-700'><strong>Possui deficiência?</strong> {student.possui_deficiencia ? "Sim" : "Não"}</p>
-        </div>
-        <div className="bg-white p-5 rounded-lg h-[430px] shadow shadow-light-300 relative ">
+          <div className="bg-white p-5 rounded-lg h-[350px] w-full shadow shadow-light-300 relative ">
               <div className="bg-primary absolute top-0 w-full left-0 rounded-t-lg flex justify-center py-1">
-            <p className='text-white roboto-medium'>Diagnosticos do Aluno</p>
+              <p className='text-white roboto-medium'>Diagnosticos do Aluno</p>
+            </div>
+                {student.avaliacoes && student.diagnosticos.length > 0 ? (
+                student.diagnosticos.map((diagnostico, index) => (
+                  <div key={index} className="p-2 pt-5">
+                    <p className='roboto-light text-gray-700'><strong>Diagnóstico:</strong> {diagnostico.diagnostico}</p>
+                    <p className='roboto-light text-gray-700'><strong>Epilepsia:</strong> {diagnostico.epilepsia ? "sim" : "Nao"}</p>
+                    <p className='roboto-light text-gray-700'><strong>Deficiência Intelectual:</strong> {diagnostico.deficiencia_intelectual? "sim" : "Nao"}</p>
+                    <p className='roboto-light text-gray-700'><strong>Alergia:</strong> {diagnostico.alergia ? "sim" : "Nao"}</p>
+                    <p className='roboto-light text-gray-700'><strong>Outros:</strong> {diagnostico.outros}</p>
+                    <p className='roboto-light text-gray-700'><strong>Atendente Terapeutico:</strong> {diagnostico.atendente_terapeutico ? "sim" : "Nao"}</p>
+                    <p className='roboto-light text-gray-700'><strong>Responsavel:</strong> {diagnostico.responsavel}</p>
+                    <p className='roboto-light text-gray-700'><strong>Email :</strong> {diagnostico.email_responsavel}</p>
+                    <p className='roboto-light text-gray-700'><strong>Telefone:</strong> {diagnostico.telefone_responsavel}</p>
+                  </div>
+                ))
+              ) : (
+                <p>Nenhuma avaliação disponível.</p>
+              )}
           </div>
-              {student.avaliacoes && student.diagnosticos.length > 0 ? (
-              student.diagnosticos.map((diagnostico, index) => (
-                <div key={index} className="p-2 border-b border-gray-200 pt-5">
-                  <p className='roboto-light text-gray-700'><strong>Diagnóstico:</strong> {diagnostico.diagnostico}</p>
-                  <p className='roboto-light text-gray-700'><strong>Epilepsia:</strong> {diagnostico.epilepsia ? "sim" : "Nao"}</p>
-                  <p className='roboto-light text-gray-700'><strong>Deficiência Intelectual:</strong> {diagnostico.deficiencia_intelectual? "sim" : "Nao"}</p>
-                  <p className='roboto-light text-gray-700'><strong>Alergia:</strong> {diagnostico.alergia ? "sim" : "Nao"}</p>
-                  <p className='roboto-light text-gray-700'><strong>Outros:</strong> {diagnostico.outros}</p>
-                  <p className='roboto-light text-gray-700'><strong>Atendente Terapeutico:</strong> {diagnostico.atendente_terapeutico ? "sim" : "Nao"}</p>
-                  <p className='roboto-light text-gray-700'><strong>Responsavel:</strong> {diagnostico.responsavel}</p>
-                  <p className='roboto-light text-gray-700'><strong>Email :</strong> {diagnostico.email_responsavel}</p>
-                  <p className='roboto-light text-gray-700'><strong>Telefone:</strong> {diagnostico.telefone_responsavel}</p>
-                </div>
-              ))
-            ) : (
-              <p>Nenhuma avaliação disponível.</p>
-            )}
         </div>
-        <div className="bg-white p-5 rounded-lg h-[430px] shadow shadow-light-300 relative  ">
+       
+        <div className="bg-white p-5 rounded-lg h-auto w-full shadow shadow-light-300 relative  ">
               <div className="bg-primary absolute top-0 w-full left-0 rounded-t-lg flex justify-center py-1">
             <p className='text-white roboto-medium'>Informações do avaliacoes</p>
           </div>
               {student.avaliacoes && student.avaliacoes.length > 0 ? (
               student.avaliacoes.map((avaliacao, index) => (
                 <div key={index} className="p-2 border-b border-gray-200 pt-5">
-                  <p><strong>Categoria:</strong> {avaliacao.categoria}</p>
-                  <p><strong>Pontuação:</strong> {avaliacao.pergunta}</p>
-                  <p><strong>Data:</strong> {avaliacao.resposta}</p>
-                  <p><strong>Data:</strong> {avaliacao.pontuacao}</p>
+                  <p><strong>Pergunta:</strong> {avaliacao.pergunta}</p>
+                  <p><strong>Resposta:</strong> {avaliacao.resposta}</p>
+                  <p><strong>Pontuação:</strong> {avaliacao.pontuacao}</p>
                   {/* Adicione mais campos de avaliação conforme necessário */}
                 </div>
               ))
@@ -93,7 +95,6 @@ const StudentDetails = () => {
             )}
         </div>
       </section>
-     
     </section>
   );
 };
