@@ -45,7 +45,7 @@ export const Container = styled.div`
         font-size: 13px;
 
         input, select {
-            display: block;
+            /* display: flex; */
             margin-top: 7px;
             box-sizing: border-box;
             width: 100%;
@@ -78,3 +78,13 @@ export const Container = styled.div`
         margin-top: 30px;
     }
 `
+
+export const ErrorMessage = styled.span`
+    display: inline-block;
+    margin-top: 5px;
+    color: #A20100; // Cor da mensagem de erro
+    font-size: 0.9em; // Tamanho da fonte (opcional)
+    background-color: #F7BABB;
+    padding: 5px;
+    border-radius: 6px;
+`;

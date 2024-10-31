@@ -31,19 +31,24 @@ export const Container = styled.div`
         display: block;
         margin-bottom: 20px;
 
-        input {
-            display: block;
+        input, select {
+            /* display: flex; */
             margin-top: 7px;
             box-sizing: border-box;
             width: 100%;
             padding: 20px 10px;
             border: 1px solid rgba(255,255,255,0.2);
+            /* border: none; */
             border-radius: 10px;
             color: #FFF;
+            background-color: #0173DF;
             outline: 0;
             font-size: 15px;
-            /* background-color: #02044A; */
-            background-color: #0173DF;
+            /* background-color:rgba(255,255,255,0.2); */
+
+            @media (max-width: 768px) {
+                padding: 10px 5px;
+            } 
         }
     }
 
@@ -76,3 +81,13 @@ export const Container = styled.div`
         background-color: #494A7C;
     }
 `
+
+export const ErrorMessage = styled.span`
+    display: inline-block;
+    margin-top: 5px;
+    color: #A20100; // Cor da mensagem de erro
+    font-size: 0.9em; // Tamanho da fonte (opcional)
+    background-color: #F7BABB;
+    padding: 5px;
+    border-radius: 6px;
+`;

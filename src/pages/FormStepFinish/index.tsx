@@ -133,6 +133,8 @@ const FormStepFinish = () => {
                 },
             });
 
+            console.log(dataForm)
+
             const containerCard = document.getElementById('container-card')
             if (containerCard) {
                 containerCard.style.display = 'none'

@@ -9,7 +9,7 @@ type State = {
     nome: string;
     email: string;
     sexo: string;
-    idade: string;
+    idade: number | '';
     matricula: string;
     serie_2025: string;
     modalidade: string;
@@ -97,7 +97,7 @@ const initialData: State = {
     perguntaNove: '',
     questionTen: '',
     perguntaDez: '',
-    unidade: '',
+    unidade: ''
 
 }
 // Context

@@ -71,3 +71,13 @@ export const Container = styled.div`
         background-color: #494A7C;
     }
 `
+
+export const ErrorMessage = styled.span`
+    display: inline-block;
+    margin-top: 5px;
+    color: #A20100; // Cor da mensagem de erro
+    font-size: 0.9em; // Tamanho da fonte (opcional)
+    background-color: #F7BABB;
+    padding: 5px;
+    border-radius: 6px;
+`;
