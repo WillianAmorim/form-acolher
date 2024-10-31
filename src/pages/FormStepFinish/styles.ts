@@ -63,9 +63,13 @@ export const Form = styled.div`
     flex-direction: column;
     align-items: center;
 
+    gap: 50px;
+
     img {
         width: auto;
         height: 200px;
+
+        margin-top: 50px;
     }
 `
 

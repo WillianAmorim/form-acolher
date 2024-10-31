@@ -2,9 +2,14 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     p {
-        font-size: 13px;
+        font-size: 18px;
         /* color: #B8B8D4; */
         color: #FFF;
+        font-weight: bold;
+
+        @media (max-width: 768px) {
+            padding-top: 25px;
+        } 
     }
 
     h1 {
@@ -22,7 +27,7 @@ export const Container = styled.div`
     }
 
     label {
-        font-size: 13px;
+        font-size: 15px;
         display: block;
         margin-bottom: 20px;
 
