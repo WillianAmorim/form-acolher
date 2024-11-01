@@ -3,9 +3,21 @@ import DataTable from 'react-data-table-component';
 import { useNavigate } from 'react-router-dom'; // Para redirecionamento interno no app
 import './dashboard.css';
 
+// Defina um tipo para representar os dados do aluno
+type Student = {
+  id: string;
+  senha_cadastro: string;
+  nome: string;
+  nome_mae: string;
+  sexo: string;
+  email: string;
+  tipo_cadastro: string;
+  telefone: string;
+};
+
 const HomePageDashboard = () => {
-  const [data, setData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
+  const [data, setData] = useState<Student[]>([]);
+  const [filteredData, setFilteredData] = useState<Student[]>([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(''); // Estado para mensagens de erro
@@ -16,7 +28,7 @@ const HomePageDashboard = () => {
   const fetchData = async () => {
     try {
       const response = await fetch('http://62.72.24.154:8082/api/alunos');
-      const result = await response.json();
+      const result: Student[] = await response.json();
       setData(result);
       setFilteredData(result);
       setLoading(false);
@@ -45,43 +57,43 @@ const HomePageDashboard = () => {
   const columns = [
     {
       name: 'Senha',
-      selector: (row) => row.senha_cadastro,
+      selector: (row: Student) => row.senha_cadastro,
       sortable: true,
     },
     {
       name: 'Nome',
-      selector: (row) => row.nome,
+      selector: (row: Student) => row.nome,
       sortable: true,
     },
     {
       name: 'Nome da Mãe',
-      selector: (row) => row.nome_mae,
+      selector: (row: Student) => row.nome_mae,
       sortable: true,
     },
     {
       name: 'Sexo',
-      selector: (row) => row.sexo,
+      selector: (row: Student) => row.sexo,
       sortable: true,
     },
     {
       name: 'Email',
-      selector: (row) => row.email,
+      selector: (row: Student) => row.email,
       sortable: true,
     },
     {
       name: 'Tipo de Cadastro',
-      selector: (row) => row.tipo_cadastro,
+      selector: (row: Student) => row.tipo_cadastro,
       sortable: true,
     },
     {
       name: 'Telefone',
-      selector: (row) => row.telefone,
+      selector: (row: Student) => row.telefone,
       sortable: true,
     },
   ];
 
   // Função chamada ao clicar em uma linha da tabela
-  const handleRowClick = (row) => {
+  const handleRowClick = (row: Student) => {
     navigate(`/aluno/${row.id}`, { state: { student: row } }); // Passa todos os dados do aluno via state
   };
 
