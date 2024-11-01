@@ -7,6 +7,9 @@ import { verifyQuestions } from '../../functionVerify';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 
+import { ClipLoader } from 'react-spinners';
+
+
 
 import PuppetAcolher from '../../assets/puppetAcolher.webp'
 import axios from 'axios';
@@ -19,6 +22,7 @@ const FormStepFinish = () => {
 
     const [isTermoChecked, setTermoChecked] = useState(false);
     const [isConcordoChecked, setConcordoChecked] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleTermoChange = () => {
         setTermoChecked(!isTermoChecked);
@@ -117,14 +121,27 @@ const FormStepFinish = () => {
     }
 
 
+    const buttonSubmit = () => {
+        const button = document.getElementById('button-submit')
 
+        if (button) {
+            button.style.display = 'none'
+        }
+
+        setLoading(true)
+
+    }
 
     const handleFinishClick = async () => {
 
         const handlePageInitial = () => {
             resetForm(); // Limpa o contexto
+            buttonSubmit()
             navigate('/')
         }
+
+
+
 
         try {
             const response = await axios.post('http://62.72.24.154:8082/api/alunos', dataForm, {
@@ -206,7 +223,8 @@ const FormStepFinish = () => {
                             <p>Li e concordo com os termos</p>
                         </div>
 
-                        <C.Button onClick={handleFinishClick} disabled={isButtonDisabled}>Finalizar</C.Button>
+                        <C.Button id='button-submit' onClick={handleFinishClick} disabled={isButtonDisabled}>Finalizar</C.Button>
+                        <ClipLoader className='loading' loading={loading} size={35} color="#123abc" />
                     </C.Inputs>
                 </C.Form>
             </C.Card>

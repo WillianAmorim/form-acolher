@@ -37,6 +37,7 @@ export const Inputs = styled.div`
     min-height: 100%;
     gap: 5px;
 
+
     div {
         display: flex;
         gap: 5px;
@@ -53,6 +54,11 @@ export const Inputs = styled.div`
 
     #temos-esclarecimento {
         text-decoration: underline;
+    }
+
+    .loading{
+        align-self: center;
+        margin-top: 25px;
     }
     
 `
@@ -89,6 +95,8 @@ export const Button = styled.button`
     border-radius: 30px;
     cursor: pointer;
     margin-top: 30px;
+
+    /* display: none; */
 `
 
 export const DivPoupop = styled.div`
