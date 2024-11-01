@@ -15,7 +15,8 @@ const Home = () => {
         <C.DivImage>
             <img src={ImgHomeDesktop} alt="" />
         </C.DivImage>
-        <C.DivIcons>
+        <C.DivIcons>]
+          <Link to="/dashboard">dashboard</Link>
             <a href="https://www.instagram.com/escolaacolher/" target='_blank'><AiFillInstagram color='#FFF' size={20}/></a>
             {/* <CgFacebook color='#FFF' size={20}/>
             <FaYoutube color='#FFF' size={20}/>  */}
