@@ -9,6 +9,8 @@ export const Container = styled.div`
         display: flex;
         flex-direction: column;
         gap: 5px;
+
+        padding: 15px 0;
     } 
 
     h1 {
@@ -17,17 +19,18 @@ export const Container = styled.div`
         font-size: 28px;
 
         @media (max-width: 768px) {
-            font-size: 20px;
+            font-size: 25px;
         } 
     }
 
     p {
-        font-size: 14px;
+        font-size: 18px;
         /* color: #B8B8D4; */
         color: #FFF;
+        /* font-weight: bold; */
 
         @media (max-width: 768px) {
-            font-size: 12px;
+            font-size: 18px;
         }
     }
 `

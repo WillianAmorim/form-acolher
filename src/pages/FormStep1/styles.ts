@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     p {
-        font-size: 13px;
+        font-size: 18px;
         /* color: #B8B8D4; */
         color: #FFF;
+        font-weight: bold;
 
         @media (max-width: 768px) {
-            margin: 15px 0;
+            padding: 15px 15px;
 
             a {
                 flex-direction: column;
@@ -42,10 +43,10 @@ export const Container = styled.div`
     }
 
     label {
-        font-size: 13px;
+        font-size: 15px;
 
         input, select {
-            display: block;
+            /* display: flex; */
             margin-top: 7px;
             box-sizing: border-box;
             width: 100%;
@@ -78,3 +79,13 @@ export const Container = styled.div`
         margin-top: 30px;
     }
 `
+
+export const ErrorMessage = styled.span`
+    display: inline-block;
+    margin-top: 5px;
+    color: #A20100; // Cor da mensagem de erro
+    font-size: 0.9em; // Tamanho da fonte (opcional)
+    background-color: #F7BABB;
+    padding: 5px;
+    border-radius: 6px;
+`;

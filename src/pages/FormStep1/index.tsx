@@ -1,13 +1,36 @@
 import * as C from './styles';
-import { Theme } from '../../components/Theme'
+import { Theme } from '../../components/Theme';
 import { useNavigate } from 'react-router-dom';
-import { useForm, FormActions } from '../../contexts/FormContext'
-import { ChangeEvent, useEffect } from 'react';
-import { SelectOption } from '../../components/SelectOption';
+import { useForm, FormActions } from '../../contexts/FormContext';
+import { useEffect } from 'react';
+import { useForm as useHookForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+// Schema de validação
+const schema = yup.object().shape({
+    nome: yup.string().required('Nome é obrigatório'),
+    idade: yup.number()
+        .typeError('Idade deve ser um número')
+        .positive('Idade deve ser um número positivo')
+        .integer('Idade deve ser um número inteiro')
+        .required('Idade é obrigatória'),
+    sexo: yup.string().required('Sexo é obrigatório'),
+    matricula: yup.string().required('Status de matrícula é obrigatório'),
+    serie_2025: yup.string().required('Escolha uma turma é obrigatória'),
+    unidade: yup.string().required('Unidade é obrigatória'),
+});
 
 const FormStep1 = () => {
     const navigate = useNavigate();
-    const { state, dispatch } = useForm();
+    const { dispatch, state } = useForm();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useHookForm({
+        resolver: yupResolver(schema),
+    });
 
     useEffect(() => {
         dispatch({
@@ -16,143 +39,186 @@ const FormStep1 = () => {
         });
     }, [dispatch]);
 
-    const handleNextStep = () => {
-        if ((state.nome !== '') && (state.idade !== '') && (state.sexo !== '') && (state.matricula !== '') && (state.serie_2025 !== '')) {
-            navigate('/step2')
-        } else {
-            alert('Preencha os dados')
+    const onSubmit = (data: any) => {
+        // Atualiza o estado do formulário
+
+        // Verifica se a idade é um número válido
+        if (data.idade === '' || isNaN(data.idade)) {
+            // Não faça nada ou adicione um alerta, pois a idade é inválida
+            console.error("Idade inválida");
+            return;
         }
-    }
 
-    const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch({
-            type: FormActions.setNome,
-            payload: e.target.value
-        })
-    }
-
-    const handleAgeChange = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch({
             type: FormActions.setIdade,
-            payload: e.target.value
-        })
-    }
+            payload: state.idade, // Usando diretamente o valor já convertido
+        });
 
-    const manageEnrollmentStatus = (matricula: string) => {
         dispatch({
-            type: FormActions.setMatricula,
-            payload: matricula
-        })
-    }
-
-    const setGenero = (genero: string) => {
+            type: FormActions.setNome,
+            payload: state.nome
+        });
+        dispatch({
+            type: FormActions.setIdade,
+            payload: state.idade
+        });
         dispatch({
             type: FormActions.setSexo,
-            payload: genero
-        })
-    }
-
-    const handleTurmaChange = (e: ChangeEvent<HTMLSelectElement>) => {
+            payload: state.sexo
+        });
+        dispatch({
+            type: FormActions.setMatricula,
+            payload: state.matricula
+        });
         dispatch({
             type: FormActions.setSerie_2025,
-            payload: e.target.value
+            payload: state.serie_2025
         });
-    };
-
-    const handleUnidadeChange = (e: ChangeEvent<HTMLSelectElement>) => {
         dispatch({
             type: FormActions.setUnidade,
-            payload: e.target.value
+            payload: state.unidade
         });
+
+        navigate('/step2');
     };
 
     return (
         <Theme>
             <C.Container>
-                {/* <p>Passo 1/3</p> */}
-                {/* <h1>Vamos começar com seu nome</h1> */}
                 <p>Preencha o campo abaixo com atenção.</p>
 
                 <hr />
 
-                <label htmlFor="">
+                <label>
                     Nome do aluno
                     <input
                         type="text"
-                        autoFocus
                         value={state.nome}
-                        onChange={handleNameChange}
-                        required
+                        {...register('nome')}
+                        onChange={(e) => dispatch({ type: FormActions.setNome, payload: e.target.value })}
                     />
+                    {errors.nome && <C.ErrorMessage>{errors.nome.message}</C.ErrorMessage>}
                 </label>
 
                 <hr />
 
-                <label htmlFor="">
+                <label>
                     Idade
                     <input
-                        type="text"
-                        autoFocus
+                        type="number"
                         value={state.idade}
-                        onChange={handleAgeChange}
+                        {...register('idade', {
+                            valueAsNumber: true,
+                            required: 'Idade é obrigatória', // Mensagem de erro personalizada
+                        })}
+                        onChange={(e) => dispatch({ type: FormActions.setIdade, payload: e.target.value })}
                     />
+                    {errors.idade && <C.ErrorMessage>{errors.idade.message}</C.ErrorMessage>}
                 </label>
 
                 <hr />
 
-                <label htmlFor="">
+                {/* <label>
                     Sexo
                     <SelectOption
                         title="Masculino"
                         description=""
                         selected={state.sexo === 'M'}
-                        onClick={() => setGenero('M')}
+                        onClick={() => dispatch({ type: FormActions.setSexo, payload: 'M' })}
                     />
 
                     <SelectOption
-                        title="Feminino"
+                        title="Feminino"ja tenho
                         description=""
                         selected={state.sexo === 'F'}
-                        onClick={() => setGenero('F')}
+                        onClick={() => dispatch({ type: FormActions.setSexo, payload: 'F' })}
                     />
+                    {errors.sexo && <C.ErrorMessage>{errors.sexo.message}</C.ErrorMessage>}
+                </label> */}
+
+                <label htmlFor="sexo">
+                    Sexo
+                    <select
+                        id="sexo"
+                        {...register('sexo')}
+                        value={state.sexo}
+                        onChange={(e) => dispatch({ type: FormActions.setSexo, payload: e.target.value })}
+                        style={{
+                            backgroundColor: state.sexo ? '#F977B7' : '#0173DF', // Muda a cor com base na seleção
+                            color: 'white', // Adicione uma cor de texto se necessário
+                        }}>
+                        <option value="">Selecione uma opção</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                    </select>
+                    {errors.sexo && <C.ErrorMessage>{errors.sexo.message}</C.ErrorMessage>}
                 </label>
 
                 <hr />
 
                 <label htmlFor="turmaSelect">
                     Escolha sua unidade desejada
-                    <select id="turmaSelect" value={state.unidade} onChange={handleUnidadeChange}>
+                    <select id="turmaSelect" value={state.unidade} {...register('unidade')} onChange={(e) => dispatch({ type: FormActions.setUnidade, payload: e.target.value })} style={{
+                            backgroundColor: state.unidade ? '#F977B7' : '#0173DF', // Muda a cor com base na seleção
+                            color: 'white', // Adicione uma cor de texto se necessário
+                        }}>
                         <option value="">Selecione a unidade</option>
                         <option value="vinhais">Vinhais</option>
                         <option value="cohatrac">Cohatrac</option>
                         <option value="turu">Turu</option>
                     </select>
+                    {errors.unidade && <C.ErrorMessage>{errors.unidade.message}</C.ErrorMessage>}
                 </label>
 
                 <hr />
 
-                <label htmlFor="">
+                <label htmlFor="matriculaRematricula">
+                    Matrícula/Rematrícula
+                    <select id="matriculaRematricula" value={state.matricula} {...register('matricula')} onChange={(e) => dispatch({ type: FormActions.setMatricula, payload: e.target.value })} style={{
+                            backgroundColor: state.matricula ? '#F977B7' : '#0173DF', // Muda a cor com base na seleção
+                            color: 'white', // Adicione uma cor de texto se necessário
+                        }}>
+                        <option value="">Selecione uma opção</option>
+                        <option value="matricula">Matrícula</option>
+                        <option value="rematricula">Rematricula</option>
+                    </select>
+                    {errors.matricula && <C.ErrorMessage>{errors.matricula.message}</C.ErrorMessage>}
+                </label>
+
+                <hr />
+
+                {/* <label>
                     Matrícula/Rematrícula
                     <SelectOption
                         title="Matrícula"
                         description=""
                         selected={state.matricula === 'matricula'}
-                        onClick={() => manageEnrollmentStatus('matricula')}
+                        onClick={() => {
+                            dispatch({ type: FormActions.setMatricula, payload: 'matricula' });
+                            // Adiciona a lógica para definir o campo
+                            register('matricula').onChange({ target: { value: 'matricula' } });
+                        }}
                     />
 
                     <SelectOption
                         title="Rematrícula"
                         description=""
                         selected={state.matricula === 'rematricula'}
-                        onClick={() => manageEnrollmentStatus('rematricula')}
+                        onClick={() => {
+                            dispatch({ type: FormActions.setMatricula, payload: 'rematricula' });
+                            // Adiciona a lógica para definir o campo
+                            register('matricula').onChange({ target: { value: 'rematricula' } });
+                        }}
                     />
-                </label>
-
-                <hr />
+                    {errors.matricula && <C.ErrorMessage>{errors.matricula.message}</C.ErrorMessage>}
+                </label> */}
 
                 <label htmlFor="turmaSelect">
                     Escolha a turma a ser cursada
-                    <select id="turmaSelect" value={state.serie_2025} onChange={handleTurmaChange}>
+                    <select id="turmaSelect" value={state.serie_2025} {...register('serie_2025')} onChange={(e) => dispatch({ type: FormActions.setSerie_2025, payload: e.target.value })} style={{
+                            backgroundColor: state.serie_2025 ? '#F977B7' : '#0173DF', // Muda a cor com base na seleção
+                            color: 'white', // Adicione uma cor de texto se necessário
+                        }}>
                         <option value="">Selecione uma turma</option>
                         <option value="bercario">Berçario</option>
                         <option value="mine-maternal">Mine Maternal</option>
@@ -170,12 +236,15 @@ const FormStep1 = () => {
                         <option value="8-ano">8° ano</option>
                         <option value="9-ano">9° ano</option>
                     </select>
+                    {errors.serie_2025 && <C.ErrorMessage>{errors.serie_2025.message}</C.ErrorMessage>}
                 </label>
 
-                <button onClick={handleNextStep}>Próximo</button>
+                <div>
+                    <button type="button" onClick={handleSubmit(onSubmit)}>Próximo</button>
+                </div>
             </C.Container>
         </Theme>
-    )
-}
+    );
+};
 
-export default FormStep1
+export default FormStep1;

@@ -2,9 +2,14 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     p {
-        font-size: 13px;
+        font-size: 18px;
         /* color: #B8B8D4; */
         color: #FFF;
+        font-weight: bold;
+
+        @media (max-width: 768px) {
+            padding-top: 25px;
+        } 
     }
 
     h1 {
@@ -22,7 +27,7 @@ export const Container = styled.div`
     }
 
     label {
-        font-size: 13px;
+        font-size: 15px;
         display: block;
         margin-bottom: 20px;
 
@@ -71,3 +76,13 @@ export const Container = styled.div`
         background-color: #494A7C;
     }
 `
+
+export const ErrorMessage = styled.span`
+    display: inline-block;
+    margin-top: 5px;
+    color: #A20100; // Cor da mensagem de erro
+    font-size: 0.9em; // Tamanho da fonte (opcional)
+    background-color: #F7BABB;
+    padding: 5px;
+    border-radius: 6px;
+`;

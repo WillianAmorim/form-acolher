@@ -8,7 +8,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 
 
-import PuppetAcolher from '../../assets/puppetAcolher.png'
+import PuppetAcolher from '../../assets/puppetAcolher.webp'
 import axios from 'axios';
 
 
@@ -133,6 +133,8 @@ const FormStepFinish = () => {
                 },
             });
 
+            console.log(dataForm)
+
             const containerCard = document.getElementById('container-card')
             if (containerCard) {
                 containerCard.style.display = 'none'
@@ -189,7 +191,7 @@ const FormStepFinish = () => {
                                 />
                             </label>
 
-                            <p onClick={ShowTermos}>Termo de livre esclarecimento</p>
+                            <p onClick={ShowTermos} id='temos-esclarecimento'>Termo de livre esclarecimento</p>
                         </div>
 
                         <div>
