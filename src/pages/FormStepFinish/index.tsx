@@ -7,7 +7,7 @@ import { verifyQuestions } from '../../functionVerify';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 
-import { ClipLoader } from 'react-spinners';
+// import { ClipLoader } from 'react-spinners';
 
 
 
@@ -22,7 +22,7 @@ const FormStepFinish = () => {
 
     const [isTermoChecked, setTermoChecked] = useState(false);
     const [isConcordoChecked, setConcordoChecked] = useState(false);
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
 
     const handleTermoChange = () => {
         setTermoChecked(!isTermoChecked);
@@ -120,23 +120,26 @@ const FormStepFinish = () => {
         ]
     }
 
+    const handleFinishClick = async () => {
 
-    const buttonSubmit = () => {
-        const button = document.getElementById('button-submit')
+        const button = document.getElementById('button-submit');
+        const spinner = document.getElementById('spinner');
+
 
         if (button) {
-            button.style.display = 'none'
+            button.style.display = 'none';
         }
 
-        setLoading(true)
+        if (spinner) {
+            spinner.style.display = 'flex';
 
-    }
+        }
 
-    const handleFinishClick = async () => {
+        console.log(spinner?.style.display);
+
 
         const handlePageInitial = () => {
             resetForm(); // Limpa o contexto
-            buttonSubmit()
             navigate('/')
         }
 
@@ -199,7 +202,7 @@ const FormStepFinish = () => {
                 <C.Form>
                     <img src={PuppetAcolher} alt="Oi" />
                     <C.Inputs>
-                        <div>
+                        <div className='checkbox'>
                             <label>
                                 <input
                                     type="checkbox"
@@ -211,7 +214,7 @@ const FormStepFinish = () => {
                             <p onClick={ShowTermos} id='temos-esclarecimento'>Termo de livre esclarecimento</p>
                         </div>
 
-                        <div>
+                        <div className='checkbox'>
                             <label>
                                 <input
                                     type="checkbox"
@@ -224,7 +227,7 @@ const FormStepFinish = () => {
                         </div>
 
                         <C.Button id='button-submit' onClick={handleFinishClick} disabled={isButtonDisabled}>Finalizar</C.Button>
-                        <ClipLoader className='loading' loading={loading} size={35} color="#123abc" />
+                        <div id="spinner"></div>
                     </C.Inputs>
                 </C.Form>
             </C.Card>

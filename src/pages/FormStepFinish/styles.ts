@@ -37,10 +37,16 @@ export const Inputs = styled.div`
     min-height: 100%;
     gap: 5px;
 
+    align-items: center;
 
-    div {
+
+    /* background-color: rebeccapurple; */
+
+
+    .checkbox {
         display: flex;
         gap: 5px;
+        align-self: flex-start;
     }
 
     label {
@@ -56,9 +62,39 @@ export const Inputs = styled.div`
         text-decoration: underline;
     }
 
-    .loading{
+    /* .loading{
         align-self: center;
         margin-top: 25px;
+    } */
+
+    @keyframes spinner {
+        to {transform: rotate(360deg);}
+    }
+    #spinner {
+        /* content: ''; */
+        /* box-sizing: border-box; */
+        /* position: absolute; */
+        /* top: 20%; */
+        /* left: 20%; */
+        display: none;
+        width: 40px;
+        height: 40px;
+        margin-top: 50px;
+        /* margin-left: 0px; */
+        border-radius: 50%;
+        border: 2px solid #ccc;
+        border-top-color: #333;
+        animation: spinner .6s linear infinite;
+        /* align-self: center; */
+
+        /* display: flex; */
+        gap: 5px;
+        /* justify-content: flex-start; */
+        /* align-self: flex-start; */
+    }
+
+    .display-flex-class {
+        display: flex !important; 
     }
     
 `
@@ -107,9 +143,30 @@ export const DivPoupop = styled.div`
     padding: 25px;
     border-radius: 25px;
     left: 510px;
-`  
+`
 
 export const ContainerSenha = styled.div`
     display: none;
+`
+
+export const ContainerSpinner = styled.div`
+    /* @keyframes spinner {
+        to {transform: rotate(360deg);}
+    }
+    .spinner:before {
+        content: '';
+        box-sizing: border-box;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        width: 20px;
+        height: 20px;
+        margin-top: -10px;
+        margin-left: -10px;
+        border-radius: 50%;
+        border: 2px solid #ccc;
+        border-top-color: #333;
+        animation: spinner .6s linear infinite;
+    } */
 `
 
