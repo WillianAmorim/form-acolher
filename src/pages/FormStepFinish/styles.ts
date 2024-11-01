@@ -50,6 +50,10 @@ export const Inputs = styled.div`
     button {
         max-width: min-content;
     }
+
+    #temos-esclarecimento {
+        text-decoration: underline;
+    }
     
 `
 

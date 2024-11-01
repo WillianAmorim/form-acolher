@@ -191,7 +191,7 @@ const FormStepFinish = () => {
                                 />
                             </label>
 
-                            <p onClick={ShowTermos}>Termo de livre esclarecimento</p>
+                            <p onClick={ShowTermos} id='temos-esclarecimento'>Termo de livre esclarecimento</p>
                         </div>
 
                         <div>
