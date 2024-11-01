@@ -17,7 +17,6 @@ FROM nginx:alpine
 # Copiar os arquivos de build gerados para o diretório de conteúdo do Nginx
 COPY --from=build /app/dist /usr/share/nginx/html
 
-
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
