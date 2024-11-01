@@ -17,6 +17,7 @@ export const Container = styled.div`
         margin: 0;
         padding: 0;
         font-size: 28px;
+        font-weight: bold;
 
         @media (max-width: 768px) {
             font-size: 25px;
@@ -27,7 +28,7 @@ export const Container = styled.div`
         font-size: 18px;
         /* color: #B8B8D4; */
         color: #FFF;
-        /* font-weight: bold; */
+        font-weight: bold;
 
         @media (max-width: 768px) {
             font-size: 18px;

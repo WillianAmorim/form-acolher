@@ -40,7 +40,7 @@ export const SectionItens = styled.div`
     flex-direction: column;
     align-items: center;
     padding-top: 50px;
-    gap: 20px;
+    gap: 10px;
 
     @media (max-width: 768px) {
         padding-top: 100px;
@@ -50,11 +50,16 @@ export const SectionItens = styled.div`
         color: #004AAD;
         font-family: 'Chewy', sans-serif;
         font-weight: 400;
+
+        font-size: 35px;
     }
 
     p {
         color: #FF2193;
         font-family: 'Chewy', sans-serif;
+
+        font-size: 20px;
+        margin-bottom: 25px;
     }
 
     a {
@@ -64,6 +69,8 @@ export const SectionItens = styled.div`
         font-family: 'Chewy', sans-serif;
         font-size: 25px;
         border-radius: 25px;
+
+        /* margin-top: 25px; */
     }
 `
 
