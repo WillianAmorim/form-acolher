@@ -7,6 +7,9 @@ import { verifyQuestions } from '../../functionVerify';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 
+// import { ClipLoader } from 'react-spinners';
+
+
 
 import PuppetAcolher from '../../assets/puppetAcolher.webp'
 import axios from 'axios';
@@ -19,6 +22,7 @@ const FormStepFinish = () => {
 
     const [isTermoChecked, setTermoChecked] = useState(false);
     const [isConcordoChecked, setConcordoChecked] = useState(false);
+    // const [loading, setLoading] = useState(false);
 
     const handleTermoChange = () => {
         setTermoChecked(!isTermoChecked);
@@ -116,15 +120,31 @@ const FormStepFinish = () => {
         ]
     }
 
-
-
-
     const handleFinishClick = async () => {
+
+        const button = document.getElementById('button-submit');
+        const spinner = document.getElementById('spinner');
+
+
+        if (button) {
+            button.style.display = 'none';
+        }
+
+        if (spinner) {
+            spinner.style.display = 'flex';
+
+        }
+
+        console.log(spinner?.style.display);
+
 
         const handlePageInitial = () => {
             resetForm(); // Limpa o contexto
             navigate('/')
         }
+
+
+
 
         try {
             const response = await axios.post('http://62.72.24.154:8082/api/alunos', dataForm, {
@@ -182,7 +202,7 @@ const FormStepFinish = () => {
                 <C.Form>
                     <img src={PuppetAcolher} alt="Oi" />
                     <C.Inputs>
-                        <div>
+                        <div className='checkbox'>
                             <label>
                                 <input
                                     type="checkbox"
@@ -194,7 +214,7 @@ const FormStepFinish = () => {
                             <p onClick={ShowTermos} id='temos-esclarecimento'>Termo de livre esclarecimento</p>
                         </div>
 
-                        <div>
+                        <div className='checkbox'>
                             <label>
                                 <input
                                     type="checkbox"
@@ -206,7 +226,8 @@ const FormStepFinish = () => {
                             <p>Li e concordo com os termos</p>
                         </div>
 
-                        <C.Button onClick={handleFinishClick} disabled={isButtonDisabled}>Finalizar</C.Button>
+                        <C.Button id='button-submit' onClick={handleFinishClick} disabled={isButtonDisabled}>Finalizar</C.Button>
+                        <div id="spinner"></div>
                     </C.Inputs>
                 </C.Form>
             </C.Card>

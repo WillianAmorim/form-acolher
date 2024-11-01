@@ -28,23 +28,29 @@ export const Container = styled.div`
 
     label {
         font-size: 15px;
-        display: block;
-        margin-bottom: 20px;
+        font-weight: bold;
 
-        input {
-            display: block;
+
+        input, select {
+            /* display: flex; */
             margin-top: 7px;
             box-sizing: border-box;
             width: 100%;
             padding: 20px 10px;
             border: 1px solid rgba(255,255,255,0.2);
+            /* border: none; */
             border-radius: 10px;
             color: #FFF;
-            outline: 0;
-            font-size: 15px;
-            /* background-color: #02044A; */
             background-color: #0173DF;
+            outline: 0;
+            font-size: 14px;
+            /* background-color:rgba(255,255,255,0.2); */
+
+            @media (max-width: 768px) {
+                padding: 10px 5px;
+            } 
         }
+
     }
 
     button {

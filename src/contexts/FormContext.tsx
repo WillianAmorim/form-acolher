@@ -1,9 +1,6 @@
-// Context, Reducer, Provider, Hook
+import { createContext, useContext, useReducer, useState, ReactNode } from 'react';
 
-import { createContext, useContext, useReducer } from 'react'
-import { ReactNode } from 'react';
-
-
+// Define o tipo do estado inicial
 type State = {
     currentStep: number;
     nome: string;
@@ -15,13 +12,12 @@ type State = {
     modalidade: string;
     nome_mae: string;
     telefone: string;
-    outros: string
+    outros: string;
     responsavel_financeiro: string;
-    possui_deficiencia: string
+    possui_deficiencia: string;
     diagnostico: string;
     comorbidade: string[];
     atendenteTerapeuta: string;
-    // avaliacoes: [],
     questionOne: string;
     perguntaUm: string;
     questionSecond: string;
@@ -43,23 +39,29 @@ type State = {
     questionTen: string;
     perguntaDez: string;
     unidade: string;
-    resetForm: () => void; // Incluindo a função resetForm no tipo do contexto
-}
+};
 
+// Define o tipo das ações
 type Action = {
     type: FormActions;
-    payload: any;
-}
+    payload?: any;
+};
 
+// Define o tipo do contexto, incluindo resetForm, setFormData e formData
 type ContextType = {
     state: State;
-    dispatch: (action: Action) => void
-}
+    dispatch: (action: Action) => void;
+    resetForm: () => void;
+    setFormData: React.Dispatch<React.SetStateAction<State>>;
+    formData: State;
+};
 
+// Define o tipo das props do FormProvider
 type FormProviderProps = {
-    children: ReactNode
-}
+    children: ReactNode;
+};
 
+// Define o estado inicial
 const initialData: State = {
     currentStep: 0,
     nome: '',
@@ -97,14 +99,13 @@ const initialData: State = {
     perguntaNove: '',
     questionTen: '',
     perguntaDez: '',
-    unidade: '',
-    resetForm: () => {},
+    unidade: ''
+};
 
-}
 // Context
 const FormContext = createContext<ContextType | undefined>(undefined);
 
-// Reducer
+// Define as ações do formulário
 export enum FormActions {
     setCurrentStep,
     setNome,
@@ -144,9 +145,10 @@ export enum FormActions {
     setQuestionTen,
     setPerguntaDez,
     setUnidade,
-    resetForm // Adicionada ação de reset
+    resetForm
 }
 
+// Reducer
 const FormReducer = (state: State, action: Action) => {
     switch (action.type) {
         case FormActions.setCurrentStep:
@@ -233,34 +235,25 @@ const FormReducer = (state: State, action: Action) => {
 }
 
 // Provider
-
 export const FormProvider = ({ children }: FormProviderProps) => {
+    const [state, dispatch] = useReducer(FormReducer, initialData);
+    const [formData, setFormData] = useState(initialData);
 
-    const [state, dispatch] = useReducer(FormReducer, initialData)
-    
     const resetForm = () => {
-        dispatch({
-            type: FormActions.resetForm,
-            payload: undefined
-        }); // Despacha a ação de reset
+        dispatch({ type: FormActions.resetForm });
+        setFormData(initialData);
     };
-    
-    const value = { state, dispatch, resetForm }; // Inclui resetForm no contexto
 
-    return (
-        <FormContext.Provider value={value}>
-            {children}
-        </ FormContext.Provider>
-    )
-}
+    const value = { state, dispatch, resetForm, setFormData, formData };
 
-//Context Hook
+    return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
+};
 
+// Hook para acessar o contexto
 export const useForm = () => {
-    const context = useContext(FormContext)
-    if (context === undefined) {
-        throw new Error('useForm precisa ser usado dentro do FormProvider')
+    const context = useContext(FormContext);
+    if (!context) {
+        throw new Error("useForm precisa ser usado dentro do FormProvider");
     }
-
     return context;
-}
+};
