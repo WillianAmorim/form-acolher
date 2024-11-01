@@ -97,7 +97,8 @@ const initialData: State = {
     perguntaNove: '',
     questionTen: '',
     perguntaDez: '',
-    unidade: ''
+    unidade: '',
+    resetForm: () => {},
 
 }
 // Context
