@@ -1,21 +1,19 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
+import dotenv from 'dotenv';
 
-// Configuração para ambiente de desenvolvimento
-//const isDevelopment = process.env.NODE_ENV !== 'production';
-
+dotenv.config(); // Carrega as variáveis de ambiente do .env
+console.log('VITE_API_URL:', process.env.VITE_API_URL);
 export default defineConfig({
   plugins: [react(), svgr()],
-  // server: isDevelopment
-  //   ? {
-  //       proxy: {
-  //         '/api': {
-  //           target: process.env.VITE_API_URL, // Certifique-se de definir VITE_API_URL no seu arquivo .env.local
-  //           changeOrigin: true,
-  //           secure: false,
-  //         },
-  //       },
-  //     }
-  //   : {},
+  server: {
+    proxy: {
+      '/api': {
+        target: process.env.VITE_API_URL, // Use process.env no vite.config.ts
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 });

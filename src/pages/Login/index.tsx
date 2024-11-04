@@ -25,7 +25,7 @@ const Login = () => {
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault(); 
         try {
-            const response = await axios.post('http://62.72.24.154:8082/api/login', { 
+            const response = await axios.post('/api/login', { // Use caminho relativo
                 email: email,
                 password: password
             });
