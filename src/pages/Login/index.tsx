@@ -25,7 +25,7 @@ const Login = () => {
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault(); 
         try {
-            const response = await axios.post('/api/login', { // Use caminho relativo
+            const response = await axios.post('/api/login', { 
                 email: email,
                 password: password
             });
