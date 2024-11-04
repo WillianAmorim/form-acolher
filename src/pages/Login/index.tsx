@@ -23,7 +23,6 @@ const Login = () => {
 
     // Função para fazer login
     const handleLogin = async (e: React.FormEvent) => {
-        console.log(import.meta.env.VITE_API_URL)
         e.preventDefault(); 
         try {
             const response = await axios.post('/api/login', { // Use caminho relativo
