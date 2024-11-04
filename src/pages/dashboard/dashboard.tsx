@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
-import { useNavigate } from 'react-router-dom'; // Para redirecionamento interno no app
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './dashboard.css';
 
-// Defina um tipo para representar os dados do aluno
 type Student = {
   id: string;
   senha_cadastro: string;
@@ -16,21 +16,31 @@ type Student = {
 };
 
 const HomePageDashboard = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState<Student[]>([]);
   const [filteredData, setFilteredData] = useState<Student[]>([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(''); // Estado para mensagens de erro
+  const [error, setError] = useState('');
 
-  const navigate = useNavigate(); // Para redirecionamento de páginas
+  // Verifica se o usuário está autenticado
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login'); // Redireciona para a página de login se não houver token
+    }
+  }, [navigate]);
 
-  // Função para buscar os dados
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
   const fetchData = async () => {
     try {
-      const response = await fetch('http://62.72.24.154:8082/api/alunos');
-      const result: Student[] = await response.json();
-      setData(result);
-      setFilteredData(result);
+      const response = await axios.get(import.meta.env.VITE_API_URL + '/api/alunos');
+      setData(response.data);
+      setFilteredData(response.data);
       setLoading(false);
     } catch (error) {
       console.error('Erro ao buscar dados:', error);
@@ -39,12 +49,10 @@ const HomePageDashboard = () => {
     }
   };
 
-  // useEffect para buscar os dados quando o componente for montado
   useEffect(() => {
     fetchData();
   }, []);
 
-  // useEffect para filtrar os dados com base no termo de pesquisa
   useEffect(() => {
     const filtered = data.filter((item) => {
       const email = item.senha_cadastro || '';
@@ -53,60 +61,24 @@ const HomePageDashboard = () => {
     setFilteredData(filtered);
   }, [search, data]);
 
-  // Colunas para a tabela
   const columns = [
-    {
-      name: 'Senha',
-      selector: (row: Student) => row.senha_cadastro,
-      sortable: true,
-    },
-    {
-      name: 'Nome',
-      selector: (row: Student) => row.nome,
-      sortable: true,
-    },
-    {
-      name: 'Nome da Mãe',
-      selector: (row: Student) => row.nome_mae,
-      sortable: true,
-    },
-    {
-      name: 'Sexo',
-      selector: (row: Student) => row.sexo,
-      sortable: true,
-    },
-    {
-      name: 'Email',
-      selector: (row: Student) => row.email,
-      sortable: true,
-    },
-    {
-      name: 'Tipo de Cadastro',
-      selector: (row: Student) => row.tipo_cadastro,
-      sortable: true,
-    },
-    {
-      name: 'Telefone',
-      selector: (row: Student) => row.telefone,
-      sortable: true,
-    },
+    { name: 'Senha', selector: (row: Student) => row.senha_cadastro, sortable: true },
+    { name: 'Nome', selector: (row: Student) => row.nome, sortable: true },
+    { name: 'Nome da Mãe', selector: (row: Student) => row.nome_mae, sortable: true },
+    { name: 'Sexo', selector: (row: Student) => row.sexo, sortable: true },
+    { name: 'Email', selector: (row: Student) => row.email, sortable: true },
+    { name: 'Tipo de Cadastro', selector: (row: Student) => row.tipo_cadastro, sortable: true },
+    { name: 'Telefone', selector: (row: Student) => row.telefone, sortable: true },
   ];
 
-  // Função chamada ao clicar em uma linha da tabela
   const handleRowClick = (row: Student) => {
-    navigate(`/aluno/${row.id}`, { state: { student: row } }); // Passa todos os dados do aluno via state
+    navigate(`/aluno/${row.id}`, { state: { student: row } });
   };
 
-  // Custom Styles para DataTable
   const customStyles = {
-    rows: {
-      style: {
-        cursor: 'pointer',
-      },
-    },
+    rows: { style: { cursor: 'pointer' } },
   };
 
-  // Renderização da mensagem de carregamento
   if (loading) {
     return (
       <div className="absolute top-1/2 right-1/2" role="status">
@@ -131,7 +103,6 @@ const HomePageDashboard = () => {
     );
   }
 
-  // Renderização da mensagem de erro
   if (error) {
     return <div className="error-message">{error}</div>;
   }
@@ -148,7 +119,7 @@ const HomePageDashboard = () => {
             />
           </div>
           <ul>
-            <li className="font-bold text-white roboto-thin cursor-pointer">
+            <li onClick={handleLogout} className="font-bold text-white roboto-thin cursor-pointer">
               <i className="fa-solid fa-right-from-bracket"></i> Sair
             </li>
           </ul>

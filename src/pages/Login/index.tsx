@@ -7,7 +7,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import LogoAcolher from '../../assets/LogoAcolher.webp';
 
 const Login = () => {
-    // Estados para email e senha
+
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -23,9 +23,7 @@ const Login = () => {
 
     // Função para fazer login
     const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault(); // Prevenir recarregamento da página
-       
-    
+        e.preventDefault(); 
         try {
             const response = await axios.post('/api/login', { // Use caminho relativo
                 email: email,
@@ -36,25 +34,21 @@ const Login = () => {
     
             // Armazena o token no localStorage
             localStorage.setItem('token', token);
-            alert('Login bem-sucedido!');
             navigate('/dashboard')
         } catch (error) {
             // Verifica se o error é uma instância de Error antes de acessar suas propriedades
             if (error instanceof Error) {
+                navigate('/login')
                 console.error('Erro:', error.message);
-                alert(error.message || 'Erro ao fazer login');
             } else {
+                navigate('/login')
                 console.error('Erro desconhecido:', error);
-                alert('Erro ao fazer login');
             }
         }
     };
 
     // Função para fazer logout (remova ou comente se não for necessária no momento)
-    // const handleLogout = () => {
-    //     localStorage.removeItem('token');
-    //     alert('Logout bem-sucedido!');
-    // };
+    
 
     return (
         <C.Container>
@@ -88,7 +82,7 @@ const Login = () => {
                 </C.DivInputs>
 
                 <C.Button type="submit">Entrar</C.Button>
-                {/* <C.Button type="button" onClick={handleLogout}>Logout</C.Button> */}
+         
             </C.Form>
         </C.Container>
     );
