@@ -5,9 +5,14 @@ services:
       dockerfile: Dockerfile
     container_name: react-form-acolher
     ports:
-      - "${REACT_APP_PORT}:3000"  # Usa a variável de ambiente para a porta
+      - "${REACT_APP_PORT}:3000"
     environment:
-      - REACT_APP_PORT=${REACT_APP_PORT}
+      - REACT_APP_PORT=${REACT_APP_PORT} 
     networks:
       - react_network
       - formulario-cadastro
+
+networks:
+  react_network:
+  formulario-cadastro:
+    external: true
