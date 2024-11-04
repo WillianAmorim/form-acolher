@@ -68,7 +68,13 @@ const FormStep6 = () => {
             payload: state.outros
         });
 
-        navigate('/stepFinish');
+        if (state.comorbidade.includes('autismo')) {
+            console.log('autismo')
+            navigate('/step7');
+        } else {
+            console.log('nao autismo')
+            navigate('/stepFinish')
+        }
     };
 
     const handleSelectComorbiditiesChange = (comorbidade: string): void => {
@@ -101,7 +107,8 @@ const FormStep6 = () => {
             <C.Container>
                 {/* <p>Passo 5/6</p> */}
                 {/* <h1>Lega {state.name}, onde te achamos?</h1> */}
-                <p>AVALIAÇÃO DE NÍVEL DE SUPORTE PSICOSSOCIAL PARA ALUNOS COM TEA.</p>
+                {/* <p>AVALIAÇÃO DE NÍVEL DE SUPORTE PSICOSSOCIAL PARA ALUNOS COM TEA.</p> */}
+                <p>Avaliação Inicial de Necessidades Especiais de Saúde e Desenvolvimento.</p>
 
                 <hr />
 
@@ -120,7 +127,14 @@ const FormStep6 = () => {
                 <hr />
 
                 <label htmlFor="">
-                    Tem comorbidades associadas?
+                    Tem deficiência/comorbidades associadas?
+                    <SelectOption
+                        title="Autismo (Transtorno do Espectro Autista)"
+                        description=""
+                        selected={state.comorbidade.includes('autismo')}
+                        onClick={() => handleSelectComorbiditiesChange('autismo')}
+                    />
+
                     <SelectOption
                         title="Epilepsia"
                         description=""
@@ -162,7 +176,7 @@ const FormStep6 = () => {
 
 
 
-                <Link to='/step5' className='backButton'>Voltar</Link>
+                <Link to='/step4' className='backButton'>Voltar</Link>
                 <button onClick={handleSubmit(onSubmit)}>Próximo</button>
             </C.Container>
         </Theme>

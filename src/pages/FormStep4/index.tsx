@@ -42,7 +42,7 @@ const FormStep4 = () => {
         
         if (state.possui_deficiencia === 'sim') {
             console.log('página 5')
-            navigate('/step5');
+            navigate('/step6');
         } else {
             navigate('/stepFinish');
         }
@@ -57,7 +57,7 @@ const FormStep4 = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor="possui_deficiencia">
-                    Possui Deficiência
+                    Possui Deficiência/Comorbidade ?
                     <select
                         id="possui_deficiencia"
                         {...register('possui_deficiencia')}

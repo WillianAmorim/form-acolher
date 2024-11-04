@@ -39,7 +39,7 @@ const Router = () => {
         <Route path="/step2" element={<FormStep2 />} />
         <Route path="/step3" element={<FormStep3 />} />
         <Route path="/step4" element={<FormStep4 />} />
-        <Route path="/step5" element={<FormStep5 />} />
+        {/* <Route path="/step5" element={<FormStep5 />} /> */}
         <Route path="/step6" element={<FormStep6 />} />
         <Route path="/step7" element={<FormStep7 />} />
         <Route path="/step8" element={<FormStep8 />} />

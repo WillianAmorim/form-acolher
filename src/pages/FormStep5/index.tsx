@@ -46,7 +46,7 @@ const FormStep6 = () => {
             payload: state.outrasDoencas
         });
 
-        if(state.doencas.includes('autismo')) {
+        if (state.doencas.includes('autismo')) {
             console.log('autismo')
             navigate('/step7');
         } else {
@@ -61,7 +61,7 @@ const FormStep6 = () => {
             ? state.doencas.filter((item: string) => item !== comorbidade)
             : [...state.doencas, comorbidade]; // Adiciona se não estiver
 
-            console.log(newDoencas)
+        console.log(newDoencas)
 
         const elementoOutrasDoencas = document.getElementById('outrasDoencas')
 
@@ -102,18 +102,26 @@ const FormStep6 = () => {
                     />
 
                     <SelectOption
-                        title="Asma "
+                        title="Epilepsia"
                         description=""
-                        selected={state.doencas.includes('asma')}
-                        onClick={() => handleSelectComorbiditiesChange('asma')}
+                        selected={state.comorbidade.includes('epilepsia')}
+                        onClick={() => handleSelectComorbiditiesChange('epilepsia')}
                     />
 
                     <SelectOption
-                        title="Infecções de ouvido (Otite Média)"
+                        title="Deficiência Intelectual"
                         description=""
-                        selected={state.doencas.includes('otite')}
-                        onClick={() => handleSelectComorbiditiesChange('otite')}
+                        selected={state.comorbidade.includes('deficiencia-intelectual')}
+                        onClick={() => handleSelectComorbiditiesChange('deficiencia-intelectual')}
                     />
+
+                    <SelectOption
+                        title="Alergia"
+                        description=""
+                        selected={state.comorbidade.includes('alergia')}
+                        onClick={() => handleSelectComorbiditiesChange('alergia')}
+                    />
+
                     <SelectOption
                         title="Outros"
                         description=""

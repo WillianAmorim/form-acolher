@@ -163,7 +163,7 @@ const FormStep1 = () => {
                             color: 'white', // Adicione uma cor de texto se necessário
                         }}>
                         <option value="">Selecione a unidade</option>
-                        <option value="vinhais">Vinhais</option>
+                        <option value="cohafuma">Cohafuma</option>
                         <option value="cohatrac">Cohatrac</option>
                         <option value="turu">Turu</option>
                     </select>

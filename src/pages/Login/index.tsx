@@ -26,8 +26,8 @@ const Login = () => {
                         </label>
                     </C.DivInput>
                     <C.DivInput>
+                        <C.IconStyleLogin as={RiLockPasswordFill}/>
                         <label htmlFor="">
-                            <C.IconStylePassword as={RiLockPasswordFill}/>
                             <input
                                 type="text"
                                 autoFocus

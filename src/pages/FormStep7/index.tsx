@@ -62,7 +62,7 @@ const FormStep7 = () => {
                     />
                 </label>
 
-                <Link to='/step5' className='backButton'>Voltar</Link>
+                <Link to='/step4' className='backButton'>Voltar</Link>
                 <button onClick={handleNextStep}>Próximo</button>
             </C.Container>
         </Theme>
