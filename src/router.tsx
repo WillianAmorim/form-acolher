@@ -3,7 +3,7 @@ import FormStep1 from './pages/FormStep1/index.tsx';
 import FormStep2 from './pages/FormStep2/index.tsx';
 import FormStep3 from './pages/FormStep3/index.tsx';
 import FormStep4 from './pages/FormStep4/index.tsx';
-import FormStep5 from './pages/FormStep5/index.tsx';
+// import FormStep5 from './pages/FormStep5/index.tsx';
 import FormStep6 from './pages/FormStep6/index.tsx';
 import FormStep7 from './pages/FormStep7/index.tsx';
 import FormStep8 from './pages/FormStep8/index.tsx';
