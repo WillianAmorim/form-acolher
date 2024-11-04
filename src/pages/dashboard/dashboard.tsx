@@ -39,6 +39,7 @@ const HomePageDashboard = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get( '/api/alunos');
+      console.log(response.data);
       setData(response.data);
       setFilteredData(response.data);
       setLoading(false);
