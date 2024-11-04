@@ -41,6 +41,7 @@ const FormStep4 = () => {
         });
         
         if (state.possui_deficiencia === 'sim') {
+            console.log('página 5')
             navigate('/step5');
         } else {
             navigate('/stepFinish');
@@ -74,7 +75,7 @@ const FormStep4 = () => {
                 </label>
 
                     <Link to='/step3' className='backButton'>Voltar</Link>
-                    <button type="submit">Próximo</button>
+                    <button onClick={onSubmit} type="submit">Próximo</button>
                 </form>
             </C.Container>
         </Theme>

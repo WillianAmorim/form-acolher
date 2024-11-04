@@ -39,6 +39,8 @@ type State = {
     questionTen: string;
     perguntaDez: string;
     unidade: string;
+    doencas: string[];
+    outrasDoencas: string;
 };
 
 // Define o tipo das ações
@@ -99,7 +101,9 @@ const initialData: State = {
     perguntaNove: '',
     questionTen: '',
     perguntaDez: '',
-    unidade: ''
+    unidade: '',
+    doencas: [],
+    outrasDoencas: ''
 };
 
 // Context
@@ -145,6 +149,8 @@ export enum FormActions {
     setQuestionTen,
     setPerguntaDez,
     setUnidade,
+    setDoencas,
+    setOutrasDoencas,
     resetForm
 }
 
@@ -227,6 +233,10 @@ const FormReducer = (state: State, action: Action) => {
             return { ...state, perguntaDez: action.payload };
         case FormActions.setUnidade:
             return { ...state, unidade: action.payload };
+        case FormActions.setDoencas:
+            return { ...state, doencas: action.payload };
+        case FormActions.setOutrasDoencas:
+            return { ...state, outrasDoencas: action.payload };
         case FormActions.resetForm:
             return initialData; // Reseta para o estado inicial
         default:
