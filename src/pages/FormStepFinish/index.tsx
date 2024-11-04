@@ -154,7 +154,7 @@ const FormStepFinish = () => {
                 },
             });
 
-            console.log(dataForm)
+            console.log(response)
 
             const containerCard = document.getElementById('container-card')
             if (containerCard) {
