@@ -148,7 +148,7 @@ const FormStepFinish = () => {
 
 
         try {
-            const response = await axios.post(import.meta.env.VITE_API_URL+'/api/alunos', dataForm, {
+            const response = await axios.post('/api/alunos', dataForm, {
                 headers: {
                     "Content-Type": "application/json",
                 },
