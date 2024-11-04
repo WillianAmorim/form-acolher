@@ -29,7 +29,7 @@ const Login = () => {
                         <C.IconStyleLogin as={RiLockPasswordFill}/>
                         <label htmlFor="">
                             <input
-                                type="text"
+                                type="password"
                                 autoFocus
                                 placeholder='Password'
                             // value={state.name}
