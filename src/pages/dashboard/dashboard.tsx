@@ -37,9 +37,8 @@ const HomePageDashboard = () => {
   };
 
   const fetchData = async () => {
-    console.log(import.meta.env.VITE_API_URL)
     try {
-      const response = await axios.get( '/api/alunos');
+      const response = await axios.get( import.meta.env.VITE_API_URL+'/api/alunos');
       console.log(response.data)
       setData(response.data);
       setFilteredData(response.data);
