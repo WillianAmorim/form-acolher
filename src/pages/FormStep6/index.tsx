@@ -2,68 +2,182 @@ import * as C from './styles';
 import { Theme } from '../../components/Theme'
 import { useNavigate, Link } from 'react-router-dom';
 import { useForm, FormActions } from '../../contexts/FormContext'
-import { useEffect } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import { SelectOption } from '../../components/SelectOption';
+// import { useForm as useHookForm } from 'react-hook-form';
+import { useForm as useHookTeste } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+const schema = yup.object().shape({
+    diagnostico: yup.string().required('Diagnóstico é obrigatório'),
+    // outros: yup.string().required('Outros é obrigatório'),
+});
 
 const FormStep6 = () => {
     const navigate = useNavigate();
     const { state, dispatch } = useForm();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useHookTeste({
+        resolver: yupResolver(schema),
+    });
 
     useEffect(() => {
-        if (state.nome === '') {
-            navigate('/')
-        } else {
-            dispatch({
-                type: FormActions.setCurrentStep,
-                payload: 5
-            })
-        }
-
-    }, [state.nome, dispatch, navigate])
-
-    const handleNextStep = () => {
-        if (state.atendenteTerapeuta !== '') {
-            navigate('/step7')
-        } else {
-            alert('Preencha os dados')
-        }
-    }
-
-    const therapeuticAttendant = (atendenteTerapeuta: string) => {
         dispatch({
-            type: FormActions.setAtendenteTerapeuta,
-            payload: atendenteTerapeuta
+            type: FormActions.setCurrentStep,
+            payload: 5
+        });
+    }, [dispatch]);
+
+    // const handleNextStep = () => {
+    //     if ((state.diagnostico !== '') && (state.comorbidade.length > 0)) {
+    //         navigate('/step6')
+    //     } else {
+    //         alert('Preencha os dados')
+    //     }
+    // }
+
+
+    // const handleDiagnosticChange = (e: ChangeEvent<HTMLInputElement>) => {
+    //     dispatch({
+    //         type: FormActions.setDiagnostico,
+    //         payload: e.target.value
+    //     })
+    // }
+
+    const handleChangeOptionOutros = (e: ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.value)
+        dispatch({
+            type: FormActions.setOutros,
+            payload: e.target.value
         })
     }
+
+    const onSubmit = () => {
+
+        dispatch({
+            type: FormActions.setDiagnostico,
+            payload: state.diagnostico, // Usando diretamente o valor já convertido
+        });
+
+        dispatch({
+            type: FormActions.setOutros,
+            payload: state.outros
+        });
+
+        if (state.comorbidade.includes('autismo')) {
+            console.log('autismo')
+            navigate('/step7');
+        } else {
+            console.log('nao autismo')
+            navigate('/stepFinish')
+        }
+    };
+
+    const handleSelectComorbiditiesChange = (comorbidade: string): void => {
+        const newComorbidades: string[] = state.comorbidade.includes(comorbidade)
+            ? state.comorbidade.filter((item: string) => item !== comorbidade) // Verifica se matricula é um array de strings
+            : [...state.comorbidade, comorbidade]; // Adiciona se não estiver
+
+        const elementoOutros = document.getElementById('outros')
+
+        if (newComorbidades.includes('Outros')) {
+            if (elementoOutros) {
+                elementoOutros.style.display = 'flex';
+
+            }
+        } else {
+            if (elementoOutros) {
+                elementoOutros.style.display = 'none';
+            }
+        }
+
+        dispatch({
+            type: FormActions.setComorbidade,
+            payload: newComorbidades
+        });
+    };
+
 
     return (
         <Theme>
             <C.Container>
                 {/* <p>Passo 5/6</p> */}
                 {/* <h1>Lega {state.name}, onde te achamos?</h1> */}
-                <p>AVALIAÇÃO DE NÍVEL DE SUPORTE PSICOSSOCIAL PARA ALUNOS COM TEA.</p>
+                {/* <p>AVALIAÇÃO DE NÍVEL DE SUPORTE PSICOSSOCIAL PARA ALUNOS COM TEA.</p> */}
+                <p>Avaliação Inicial de Necessidades Especiais de Saúde e Desenvolvimento.</p>
 
                 <hr />
 
                 <label htmlFor="">
-                    Tem Atendente Terapêutico Particular?
-                    <SelectOption
-                        title="Sim"
-                        description=""
-                        selected={state.atendenteTerapeuta === 'Sim'}
-                        onClick={() => therapeuticAttendant('Sim')}
+                    Diagnóstico
+                    <input
+                        type="text"
+                        autoFocus
+                        value={state.diagnostico}
+                        {...register('diagnostico')}
+                        onChange={(e) => dispatch({ type: FormActions.setDiagnostico, payload: e.target.value })}
                     />
-
-                    <SelectOption
-                        title="Não"
-                        description=""
-                        selected={state.atendenteTerapeuta === 'Não'}
-                        onClick={() => therapeuticAttendant('Não')}
-                    />
+                    {errors.diagnostico && <C.ErrorMessage>{errors.diagnostico.message}</C.ErrorMessage>}
                 </label>
 
-                <Link to='/step5' className='backButton'>Voltar</Link>
-                <button onClick={handleNextStep}>Próximo</button>
+                <hr />
+
+                <label htmlFor="">
+                    Tem deficiência/comorbidades associadas?
+                    <SelectOption
+                        title="Autismo (Transtorno do Espectro Autista)"
+                        description=""
+                        selected={state.comorbidade.includes('autismo')}
+                        onClick={() => handleSelectComorbiditiesChange('autismo')}
+                    />
+
+                    <SelectOption
+                        title="Epilepsia"
+                        description=""
+                        selected={state.comorbidade.includes('epilepsia')}
+                        onClick={() => handleSelectComorbiditiesChange('epilepsia')}
+                    />
+
+                    <SelectOption
+                        title="Deficiência Intelectual"
+                        description=""
+                        selected={state.comorbidade.includes('deficiencia-intelectual')}
+                        onClick={() => handleSelectComorbiditiesChange('deficiencia-intelectual')}
+                    />
+
+                    <SelectOption
+                        title="Alergia"
+                        description=""
+                        selected={state.comorbidade.includes('alergia')}
+                        onClick={() => handleSelectComorbiditiesChange('alergia')}
+                    />
+                    <SelectOption
+                        title="Outros"
+                        description=""
+                        selected={state.comorbidade.includes('Outros')}
+                        onClick={() => handleSelectComorbiditiesChange('Outros')}
+                    />
+
+                    <label htmlFor="" id='outros'>
+                        Outros
+                        <input
+                            type="text"
+                            autoFocus
+                            value={state.outros}
+                            onChange={handleChangeOptionOutros}
+                        />
+                        {/* {errors.outros && <C.ErrorMessage>{errors.outros.message}</C.ErrorMessage>} */}
+                    </label>
+                </label>
+
+
+
+                <Link to='/step4' className='backButton'>Voltar</Link>
+                <button onClick={handleSubmit(onSubmit)}>Próximo</button>
             </C.Container>
         </Theme>
     )

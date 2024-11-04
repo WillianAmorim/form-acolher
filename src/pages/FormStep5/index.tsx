@@ -10,17 +10,16 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 const schema = yup.object().shape({
-    diagnostico: yup.string().required('Diagnóstico é obrigatório'),
+    // diagnostico: yup.string().required('Diagnóstico é obrigatório'),
     // outros: yup.string().required('Outros é obrigatório'),
 });
 
-const FormStep5 = () => {
+const FormStep6 = () => {
     const navigate = useNavigate();
     const { state, dispatch } = useForm();
     const {
-        register,
         handleSubmit,
-        formState: { errors },
+        // formState: { errors },
     } = useHookTeste({
         resolver: yupResolver(schema),
     });
@@ -32,26 +31,10 @@ const FormStep5 = () => {
         });
     }, [dispatch]);
 
-    // const handleNextStep = () => {
-    //     if ((state.diagnostico !== '') && (state.comorbidade.length > 0)) {
-    //         navigate('/step6')
-    //     } else {
-    //         alert('Preencha os dados')
-    //     }
-    // }
-
-
-    // const handleDiagnosticChange = (e: ChangeEvent<HTMLInputElement>) => {
-    //     dispatch({
-    //         type: FormActions.setDiagnostico,
-    //         payload: e.target.value
-    //     })
-    // }
-
     const handleChangeOptionOutros = (e: ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.value)
         dispatch({
-            type: FormActions.setOutros,
+            type: FormActions.setOutrasDoencas,
             payload: e.target.value
         })
     }
@@ -59,39 +42,43 @@ const FormStep5 = () => {
     const onSubmit = () => {
 
         dispatch({
-            type: FormActions.setDiagnostico,
-            payload: state.diagnostico, // Usando diretamente o valor já convertido
+            type: FormActions.setOutrasDoencas,
+            payload: state.outrasDoencas
         });
 
-        dispatch({
-            type: FormActions.setOutros,
-            payload: state.outros
-        });
+        if (state.doencas.includes('autismo')) {
+            console.log('autismo')
+            navigate('/step7');
+        } else {
+            console.log('nao autismo')
+            navigate('/step6')
+        }
 
-        navigate('/step6');
     };
 
     const handleSelectComorbiditiesChange = (comorbidade: string): void => {
-        const newComorbidades: string[] = state.comorbidade.includes(comorbidade)
-            ? state.comorbidade.filter((item: string) => item !== comorbidade) // Verifica se matricula é um array de strings
-            : [...state.comorbidade, comorbidade]; // Adiciona se não estiver
+        const newDoencas: string[] = state.doencas.includes(comorbidade)
+            ? state.doencas.filter((item: string) => item !== comorbidade)
+            : [...state.doencas, comorbidade]; // Adiciona se não estiver
 
-        const elementoOutros = document.getElementById('outros')
+        console.log(newDoencas)
 
-        if (newComorbidades.includes('Outros')) {
-            if (elementoOutros) {
-                elementoOutros.style.display = 'flex';
+        const elementoOutrasDoencas = document.getElementById('outrasDoencas')
+
+        if (newDoencas.includes('Outros')) {
+            if (elementoOutrasDoencas) {
+                elementoOutrasDoencas.style.display = 'flex';
 
             }
         } else {
-            if (elementoOutros) {
-                elementoOutros.style.display = 'none';
+            if (elementoOutrasDoencas) {
+                elementoOutrasDoencas.style.display = 'none';
             }
         }
 
         dispatch({
-            type: FormActions.setComorbidade,
-            payload: newComorbidades
+            type: FormActions.setDoencas,
+            payload: newDoencas
         });
     };
 
@@ -106,21 +93,14 @@ const FormStep5 = () => {
                 <hr />
 
                 <label htmlFor="">
-                    Diagnóstico
-                    <input
-                        type="text"
-                        autoFocus
-                        value={state.diagnostico}
-                        {...register('diagnostico')}
-                        onChange={(e) => dispatch({ type: FormActions.setDiagnostico, payload: e.target.value })}
-                    />
-                    {errors.diagnostico && <C.ErrorMessage>{errors.diagnostico.message}</C.ErrorMessage>}
-                </label>
-
-                <hr />
-
-                <label htmlFor="">
                     Tem comorbidades associadas?
+                    <SelectOption
+                        title="Autismo (Transtorno do Espectro Autista)"
+                        description=""
+                        selected={state.doencas.includes('autismo')}
+                        onClick={() => handleSelectComorbiditiesChange('autismo')}
+                    />
+
                     <SelectOption
                         title="Epilepsia"
                         description=""
@@ -141,19 +121,20 @@ const FormStep5 = () => {
                         selected={state.comorbidade.includes('alergia')}
                         onClick={() => handleSelectComorbiditiesChange('alergia')}
                     />
+
                     <SelectOption
                         title="Outros"
                         description=""
-                        selected={state.comorbidade.includes('Outros')}
+                        selected={state.doencas.includes('Outros')}
                         onClick={() => handleSelectComorbiditiesChange('Outros')}
                     />
 
-                    <label htmlFor="" id='outros'>
+                    <label htmlFor="" id='outrasDoencas'>
                         Outros
                         <input
                             type="text"
                             autoFocus
-                            value={state.outros}
+                            value={state.outrasDoencas}
                             onChange={handleChangeOptionOutros}
                         />
                         {/* {errors.outros && <C.ErrorMessage>{errors.outros.message}</C.ErrorMessage>} */}
@@ -169,4 +150,4 @@ const FormStep5 = () => {
     )
 }
 
-export default FormStep5
+export default FormStep6

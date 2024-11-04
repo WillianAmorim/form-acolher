@@ -41,7 +41,8 @@ const FormStep4 = () => {
         });
         
         if (state.possui_deficiencia === 'sim') {
-            navigate('/step5');
+            console.log('página 5')
+            navigate('/step6');
         } else {
             navigate('/stepFinish');
         }
@@ -56,7 +57,7 @@ const FormStep4 = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor="possui_deficiencia">
-                    Possui Deficiência
+                    Possui Deficiência/Comorbidade ?
                     <select
                         id="possui_deficiencia"
                         {...register('possui_deficiencia')}
@@ -74,7 +75,7 @@ const FormStep4 = () => {
                 </label>
 
                     <Link to='/step3' className='backButton'>Voltar</Link>
-                    <button type="submit">Próximo</button>
+                    <button onClick={onSubmit} type="submit">Próximo</button>
                 </form>
             </C.Container>
         </Theme>

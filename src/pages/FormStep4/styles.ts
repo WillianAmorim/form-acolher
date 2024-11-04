@@ -28,8 +28,8 @@ export const Container = styled.div`
 
     label {
         font-size: 15px;
-        font-weight: bold;
-
+        display: block;
+        margin-bottom: 20px;
 
         input, select {
             /* display: flex; */
@@ -43,14 +43,13 @@ export const Container = styled.div`
             color: #FFF;
             background-color: #0173DF;
             outline: 0;
-            font-size: 14px;
+            font-size: 15px;
             /* background-color:rgba(255,255,255,0.2); */
 
             @media (max-width: 768px) {
                 padding: 10px 5px;
             } 
         }
-
     }
 
     button {

@@ -62,6 +62,7 @@ const FormStepFinish = () => {
                 "epilepsia": state.comorbidade.includes('epilepsia'),
                 "deficiencia_intelectual": state.comorbidade.includes('deficiencia-intelectual'),
                 "alergia": state.comorbidade.includes('alergia'),
+                "autismo": state.comorbidade.includes('autismo'),
                 "outros": state.outros,
                 "responsavel": state.responsavel_financeiro,
             }
