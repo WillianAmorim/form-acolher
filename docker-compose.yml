@@ -9,8 +9,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./docker/nginx:/etc/nginx/conf.d
-      - /etc/letsencrypt:/etc/letsencrypt
+      - ./docker/nginx:/etc/nginx/confd     
+      - /etc.e/
     env_file: 
       - .env.production  # Carregue o arquivo .env.production explicitamente
     networks:
