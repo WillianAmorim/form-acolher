@@ -8,8 +8,8 @@ COPY package*.json ./
 RUN npm install
 
 # Definir variáveis de ambiente
-ARG REACT_APP_PORT
-ENV REACT_APP_PORT=${REACT_APP_PORT}
+#ARG REACT_APP_PORT
+#ENV REACT_APP_PORT=${REACT_APP_PORT}
 
 # Copiar o restante do código da aplicação e fazer o build
 COPY . .

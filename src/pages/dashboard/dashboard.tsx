@@ -27,7 +27,7 @@ const HomePageDashboard = () => {
   // Função para buscar os dados
   const fetchData = async () => {
     try {
-      const response = await fetch('http://62.72.24.154:8082/api/alunos');
+      const response = await fetch('/api/alunos');
       const result: Student[] = await response.json();
       setData(result);
       setFilteredData(result);
