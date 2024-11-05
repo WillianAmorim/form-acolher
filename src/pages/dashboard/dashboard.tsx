@@ -100,6 +100,38 @@ const HomePageDashboard = () => {
     },
   };
 
+  const handleLogout = async () => {
+    const token = localStorage.getItem('token'); // Recupera o token do localStorage
+
+    if (!token) {
+      console.error('Token não encontrado');
+      navigate('/login');
+      return;
+    }
+
+    try {
+      // Faz a requisição de logout com o token no cabeçalho
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/logout`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Limpa o token do localStorage e redireciona para a página de login
+      localStorage.removeItem('token');
+      navigate('/login');
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error);
+      // Em caso de erro, também limpa o token e redireciona para o login
+      localStorage.removeItem('token');
+      navigate('/login');
+    }
+  };
+
   if (loading) {
     return (
       <div className="absolute top-1/2 right-1/2" role="status">
@@ -140,7 +172,7 @@ const HomePageDashboard = () => {
             />
           </div>
           <ul>
-            <li className="font-bold text-white roboto-thin cursor-pointer">
+            <li onClick={handleLogout} className="font-bold text-white roboto-thin cursor-pointer">
               <i className="fa-solid fa-right-from-bracket"></i> Sair
             </li>
           </ul>
