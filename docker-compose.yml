@@ -8,9 +8,9 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    volumes:
-      - ./docker/nginx:/etc/nginx/confd     
-      - /etc.e/
+    # volumes:
+    #   - ./docker/nginx:/etc/nginx/confd     
+    #   - /etc.e/
     env_file: 
       - .env.production  # Carregue o arquivo .env.production explicitamente
     networks:
