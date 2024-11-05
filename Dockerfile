@@ -7,27 +7,26 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Definir variáveis de ambiente
-#ARG REACT_APP_PORT
-#ENV REACT_APP_PORT=${REACT_APP_PORT}
-
-# Copiar o restante do código da aplicação e fazer o build
+# Copiar todo o código da aplicação
 COPY . .
+
+# Configurar o Vite para usar as variáveis de ambiente de produção
 RUN npm run build
 
-# Etapa final: usar uma imagem leve de Node.js
-FROM node:20.18-alpine
+# Etapa final: usar Nginx para servir a build estática
+FROM nginx:alpine
 
-WORKDIR /app
+# Remover a configuração default do Nginx
+RUN rm /etc/nginx/conf.d/default.conf
 
-# Instalar o pacote 'serve' globalmente
-RUN npm install -g serve
+# Copiar o arquivo de configuração customizado
+COPY .docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 
-# Copiar os arquivos do build para o diretório de trabalho
-COPY --from=build /app/dist /app/dist
+# Copiar a build da aplicação para o diretório correto do Nginx
+COPY --from=build /app/dist /usr/share/nginx/html
 
-# Expõe a porta 3000 (ou qualquer outra que preferir)
-EXPOSE 3000
+# Expor a porta 80
+EXPOSE 80
 
-# Comando para iniciar o servidor com 'serve'
-CMD ["serve", "-s", "dist"]
+# Comando para iniciar o Nginx
+CMD ["nginx", "-g", "daemon off;"]

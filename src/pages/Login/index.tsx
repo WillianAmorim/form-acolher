@@ -24,11 +24,13 @@ const Login = () => {
     // Função para fazer login
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault(); 
+        console.log("endpoint",import.meta.env.VITE_API_URL)
         try {
-            const response = await axios.post('/api/login', { // Use caminho relativo
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/login`, { // Use caminho relativo
                 email: email,
                 password: password
             });
+            
     
             const { token } = response.data;
             console.log(token)

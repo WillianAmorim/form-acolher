@@ -27,7 +27,7 @@ const HomePageDashboard = () => {
   // Função para buscar os dados usando Axios
   const fetchData = async () => {
     try {
-      const response = await axios.get<Student[]>('/api/alunos'); // Axios substituindo fetch
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/alunos`); // Axios substituindo fetch
       setData(response.data);
       setFilteredData(response.data);
       setLoading(false);
