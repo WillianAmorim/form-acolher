@@ -4,8 +4,8 @@ import { useForm, FormActions } from '../../contexts/FormContext'
 import { useEffect, useState } from 'react';
 import { verifyQuestions } from '../../functionVerify';
 
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-import 'sweetalert2/src/sweetalert2.scss'
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 // import { ClipLoader } from 'react-spinners';
 
@@ -22,7 +22,6 @@ const FormStepFinish = () => {
 
     const [isTermoChecked, setTermoChecked] = useState(false);
     const [isConcordoChecked, setConcordoChecked] = useState(false);
-    // const [loading, setLoading] = useState(false);
 
     const handleTermoChange = () => {
         setTermoChecked(!isTermoChecked);
@@ -62,7 +61,7 @@ const FormStepFinish = () => {
                 "epilepsia": state.comorbidade.includes('epilepsia'),
                 "deficiencia_intelectual": state.comorbidade.includes('deficiencia-intelectual'),
                 "alergia": state.comorbidade.includes('alergia'),
-                "autismo": state.comorbidade.includes('autismo'),
+                // "autismo": state.comorbidade.includes('autismo'),
                 "outros": state.outros,
                 "responsavel": state.responsavel_financeiro,
             }
