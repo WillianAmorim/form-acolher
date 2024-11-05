@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
-import { useNavigate } from 'react-router-dom'; // Para redirecionamento interno no app
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Import Axios
 import './dashboard.css';
 
-// Defina um tipo para representar os dados do aluno
 type Student = {
   id: string;
   senha_cadastro: string;
@@ -20,17 +20,16 @@ const HomePageDashboard = () => {
   const [filteredData, setFilteredData] = useState<Student[]>([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(''); // Estado para mensagens de erro
+  const [error, setError] = useState('');
 
-  const navigate = useNavigate(); // Para redirecionamento de páginas
+  const navigate = useNavigate();
 
-  // Função para buscar os dados
+  // Função para buscar os dados usando Axios
   const fetchData = async () => {
     try {
-      const response = await fetch('/api/alunos');
-      const result: Student[] = await response.json();
-      setData(result);
-      setFilteredData(result);
+      const response = await axios.get<Student[]>('/api/alunos'); // Axios substituindo fetch
+      setData(response.data);
+      setFilteredData(response.data);
       setLoading(false);
     } catch (error) {
       console.error('Erro ao buscar dados:', error);
@@ -39,12 +38,10 @@ const HomePageDashboard = () => {
     }
   };
 
-  // useEffect para buscar os dados quando o componente for montado
   useEffect(() => {
     fetchData();
   }, []);
 
-  // useEffect para filtrar os dados com base no termo de pesquisa
   useEffect(() => {
     const filtered = data.filter((item) => {
       const email = item.senha_cadastro || '';
@@ -53,7 +50,6 @@ const HomePageDashboard = () => {
     setFilteredData(filtered);
   }, [search, data]);
 
-  // Colunas para a tabela
   const columns = [
     {
       name: 'Senha',
@@ -92,12 +88,10 @@ const HomePageDashboard = () => {
     },
   ];
 
-  // Função chamada ao clicar em uma linha da tabela
   const handleRowClick = (row: Student) => {
-    navigate(`/aluno/${row.id}`, { state: { student: row } }); // Passa todos os dados do aluno via state
+    navigate(`/aluno/${row.id}`, { state: { student: row } });
   };
 
-  // Custom Styles para DataTable
   const customStyles = {
     rows: {
       style: {
@@ -106,7 +100,6 @@ const HomePageDashboard = () => {
     },
   };
 
-  // Renderização da mensagem de carregamento
   if (loading) {
     return (
       <div className="absolute top-1/2 right-1/2" role="status">
@@ -131,7 +124,6 @@ const HomePageDashboard = () => {
     );
   }
 
-  // Renderização da mensagem de erro
   if (error) {
     return <div className="error-message">{error}</div>;
   }

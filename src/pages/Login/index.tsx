@@ -31,7 +31,7 @@ const Login = () => {
             });
     
             const { token } = response.data;
-    
+            console.log(token)
             // Armazena o token no localStorage
             localStorage.setItem('token', token);
             navigate('/dashboard')
