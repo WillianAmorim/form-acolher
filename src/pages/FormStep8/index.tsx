@@ -127,27 +127,6 @@ const FormStep8 = () => {
         
         avaliacoesAll.push(avaliacoes_temp)
 
-        // console.log(avaliacoesAll)
-
-        // try {
-        //     const response = await fetch("http://62.72.24.154:8082/api/alunos", {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify(dataForm),
-        //     });
-        //     console.log(dataForm)
-
-        //     if (response.ok) {
-        //         console.log("Dados enviados com sucesso");
-        //     } else {
-        //         console.error("Erro ao enviar dados");
-        //     }
-        // } catch (error) {
-        //     console.error("Erro de rede:", error);
-        // }
-
         if ((state.questionOne === '') || (state.questionSecond === '') || (state.questionThird === '') || (state.questionFourth === '') || (state.questionFive === '') || (state.questionSix === '') || (state.questionSeven === '') || (state.questionEight === '') || (state.questionNine === '') || (state.questionTen === '')) {
             alert('Preencha todos os dados !')
         } else {

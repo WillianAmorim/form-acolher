@@ -24,19 +24,29 @@ const Login = () => {
     // Função para fazer login
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault(); 
-        console.log("endpoint",import.meta.env.VITE_API_URL)
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/login`, { // Use caminho relativo
+            const response = await axios.post(`/api/login`, {
                 email: email,
                 password: password
             });
             
     
             const { token } = response.data;
-            console.log(token)
             // Armazena o token no localStorage
             localStorage.setItem('token', token);
-            navigate('/dashboard')
+
+            if (token) {
+                // Armazena o token no localStorage
+                localStorage.setItem('token', token);
+                
+                // Redireciona para o dashboard
+                navigate('/dashboard');
+            } else {
+                // Se o token não for encontrado, mostrar um alerta
+                alert("Usuário inválido!!");
+                navigate('/login');
+            }
+     
         } catch (error) {
             // Verifica se o error é uma instância de Error antes de acessar suas propriedades
             if (error instanceof Error) {

@@ -1,4 +1,4 @@
-
+version: '3'
 services:
   react-app:
     build:
@@ -8,11 +8,11 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    # volumes:
-    #   - ./docker/nginx:/etc/nginx/confd     
-    #   - /etc.e/
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt        # Volume para os certificados
+      - ./data/certbot/www:/var/www/certbot         # Volume para validação do Certbot
     env_file: 
-      - .env.production  # Carregue o arquivo .env.production explicitamente
+      - .env.production
     networks:
       - react_network
       - formulario-cadastro

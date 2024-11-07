@@ -6,6 +6,7 @@ type Diagnostico = {
   epilepsia: boolean;
   deficiencia_intelectual: boolean;
   alergia: boolean;
+  autismo: boolean;
   outros: string;
   atendente_terapeutico: boolean;
   responsavel: string;
@@ -101,6 +102,7 @@ const StudentDetails = () => {
                 <div key={index} className="p-2 pt-5">
                   <p className="roboto-light text-gray-700"><strong>Diagnóstico:</strong> {diagnostico.diagnostico}</p>
                   <p className="roboto-light text-gray-700"><strong>Epilepsia:</strong> {diagnostico.epilepsia ? "Sim" : "Não"}</p>
+                  <p className="roboto-light text-gray-700"><strong>Autismo:</strong> {diagnostico.autismo ? "Sim" : "Não"}</p>
                   <p className="roboto-light text-gray-700"><strong>Deficiência Intelectual:</strong> {diagnostico.deficiencia_intelectual ? "Sim" : "Não"}</p>
                   <p className="roboto-light text-gray-700"><strong>Alergia:</strong> {diagnostico.alergia ? "Sim" : "Não"}</p>
                   <p className="roboto-light text-gray-700"><strong>Outros:</strong> {diagnostico.outros}</p>

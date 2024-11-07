@@ -24,10 +24,19 @@ const HomePageDashboard = () => {
 
   const navigate = useNavigate();
 
+  // Verifica se existe um token no localStorage e redireciona se não existir
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // Redireciona para a página inicial ou de login
+      navigate('/login');
+    }
+  }, [navigate]);
+
   // Função para buscar os dados usando Axios
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/alunos`); // Axios substituindo fetch
+      const response = await axios.get(`/api/alunos`); // Axios substituindo fetch
       setData(response.data);
       setFilteredData(response.data);
       setLoading(false);
@@ -101,6 +110,7 @@ const HomePageDashboard = () => {
   };
 
   const handleLogout = async () => {
+    console.log("reinaldo")
     const token = localStorage.getItem('token'); // Recupera o token do localStorage
 
     if (!token) {
@@ -112,7 +122,7 @@ const HomePageDashboard = () => {
     try {
       // Faz a requisição de logout com o token no cabeçalho
       await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/logout`,
+        `/api/logout`,
         {},
         {
           headers: {
@@ -178,7 +188,17 @@ const HomePageDashboard = () => {
           </ul>
         </div>
       </header>
-      
+
+      {/* Seção de Resumo */}
+      <section className="p-3">
+        <div className="flex gap-4">
+          <div className="card bg-primary text-white p-4 rounded shadow">
+            <h3 className="text-lg font-bold">Total de Usuários</h3>
+            <p className="text-2xl font-bold">{data.length}</p>
+          </div>
+        </div>
+      </section>
+
       <section className="p-3">
         <div className="flex items-center gap-1">
           <i className="fa-solid fa-people-roof text-md text-secondary -mt-2"></i>

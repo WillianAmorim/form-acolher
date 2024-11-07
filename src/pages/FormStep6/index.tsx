@@ -49,7 +49,7 @@ const FormStep6 = () => {
     // }
 
     const handleChangeOptionOutros = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value)
+
         dispatch({
             type: FormActions.setOutros,
             payload: e.target.value
@@ -69,10 +69,8 @@ const FormStep6 = () => {
         });
 
         if (state.comorbidade.includes('autismo')) {
-            console.log('autismo')
             navigate('/step7');
         } else {
-            console.log('nao autismo')
             navigate('/stepFinish')
         }
     };

@@ -11,6 +11,7 @@ if (process.env.NODE_ENV === 'production') {
   dotenv.config(); // Carregar o arquivo padrão .env
 }
 
+
 export default defineConfig({
   plugins: [react(), svgr()],
   server: {

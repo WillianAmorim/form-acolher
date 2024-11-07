@@ -41,7 +41,6 @@ const FormStep4 = () => {
         });
         
         if (state.possui_deficiencia === 'sim') {
-            console.log('página 5')
             navigate('/step6');
         } else {
             navigate('/stepFinish');

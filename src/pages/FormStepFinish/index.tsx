@@ -135,7 +135,6 @@ const FormStepFinish = () => {
 
         }
 
-        console.log(spinner?.style.display);
 
 
         const handlePageInitial = () => {
@@ -150,7 +149,6 @@ const FormStepFinish = () => {
                 },
             });
 
-            console.log(response)
 
             const containerCard = document.getElementById('container-card')
             if (containerCard) {

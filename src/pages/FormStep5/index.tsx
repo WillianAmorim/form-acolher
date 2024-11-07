@@ -32,7 +32,6 @@ const FormStep6 = () => {
     }, [dispatch]);
 
     const handleChangeOptionOutros = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value)
         dispatch({
             type: FormActions.setOutrasDoencas,
             payload: e.target.value
@@ -47,10 +46,8 @@ const FormStep6 = () => {
         });
 
         if (state.doencas.includes('autismo')) {
-            console.log('autismo')
             navigate('/step7');
         } else {
-            console.log('nao autismo')
             navigate('/step6')
         }
 
@@ -61,7 +58,6 @@ const FormStep6 = () => {
             ? state.doencas.filter((item: string) => item !== comorbidade)
             : [...state.doencas, comorbidade]; // Adiciona se não estiver
 
-        console.log(newDoencas)
 
         const elementoOutrasDoencas = document.getElementById('outrasDoencas')
 
