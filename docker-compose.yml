@@ -6,12 +6,12 @@ services:
     container_name: react-form-acolher
     ports:
       - "80:80"
-      - "443:443"  # Exponha a porta 443 para HTTPS
+      - "443:443"
     volumes:
       - certbot-etc:/etc/letsencrypt  # Volume para persistir os certificados SSL
       - certbot-var:/var/www/certbot  # Volume para a validação do Certbot
     env_file: 
-      - .env.production  # Carrega o arquivo .env.production explicitamente
+      - .env.production
     networks:
       - react_network
       - formulario-cadastro
