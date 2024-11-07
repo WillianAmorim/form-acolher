@@ -15,7 +15,7 @@ services:
       - react_network
       - formulario-cadastro
 
- certbot:
+  certbot:
     image: certbot/certbot
     volumes:
       - ./data/certbot/www:/var/www/certbot          # Volume para validação do Certbot
