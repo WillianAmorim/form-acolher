@@ -1,3 +1,11 @@
+# Etapa de build da aplicação
+FROM node:alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
 # Etapa final: usar Nginx para servir a build estática
 FROM nginx:alpine
 
