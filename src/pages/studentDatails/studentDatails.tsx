@@ -1,4 +1,6 @@
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 // Definindo os tipos para Diagnostico e Avaliacao
 type Diagnostico = {
@@ -39,7 +41,46 @@ type Student = {
 
 const StudentDetails = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const student: Student | null = location.state?.student || null;
+
+  // Verificação de autenticação
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // Se o token não existe, redireciona para a página de login
+      navigate('/login');
+    }
+  }, [navigate]);
+
+  // Função para fazer logout
+  const handleLogout = async () => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      console.error('Token não encontrado');
+      navigate('/login');
+      return;
+    }
+
+    try {
+      await axios.post(
+        `/api/logout`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      localStorage.removeItem('token');
+      navigate('/login');
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error);
+      localStorage.removeItem('token');
+      navigate('/login');
+    }
+  };
 
   // Verifica se o objeto student foi passado
   if (!student) {
@@ -58,7 +99,7 @@ const StudentDetails = () => {
             />
           </div>
           <ul>
-            <li className="font-bold text-white roboto-thin cursor-pointer">
+            <li onClick={handleLogout} className="font-bold text-white roboto-thin cursor-pointer">
               <i className="fa-solid fa-right-from-bracket"></i> Sair
             </li>
           </ul>
@@ -129,7 +170,6 @@ const StudentDetails = () => {
                 <p><strong>Pergunta:</strong> {avaliacao.pergunta}</p>
                 <p><strong>Resposta:</strong> {avaliacao.resposta}</p>
                 <p><strong>Pontuação:</strong> {avaliacao.pontuacao}</p>
-                {/* Adicione mais campos de avaliação conforme necessário */}
               </div>
             ))
           ) : (

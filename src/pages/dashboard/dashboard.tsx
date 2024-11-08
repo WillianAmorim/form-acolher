@@ -110,7 +110,6 @@ const HomePageDashboard = () => {
   };
 
   const handleLogout = async () => {
-    console.log("reinaldo")
     const token = localStorage.getItem('token'); // Recupera o token do localStorage
 
     if (!token) {
