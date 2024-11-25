@@ -148,7 +148,7 @@ const FormStepFinish = () => {
 
 
         try {
-            const response = await axios.post('http://62.72.24.154:8082/api/alunos', dataForm, {
+            const response = await axios.post('http://62.72.24.154:8080/api/alunos', dataForm, {
                 headers: {
                     "Content-Type": "application/json",
                 },
